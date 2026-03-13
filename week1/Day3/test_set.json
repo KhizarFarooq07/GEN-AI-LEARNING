@@ -1,0 +1,210 @@
+{
+  "test_set": {
+    "description": "25-question evaluation test set for comparing LLM-A and LLM-B performance on PDF-based QA",
+    "total_questions": 25,
+    "answerable_from_pdfs": 20,
+    "not_in_pdfs": 5,
+    "questions": [
+      {
+        "id": 1,
+        "question": "What are the main principles of RAG (Retrieval-Augmented Generation) systems?",
+        "source": "PDF-based",
+        "expected_keywords": ["retrieval", "augmented", "generation", "knowledge base", "grounding"],
+        "ground_truth_summary": "RAG combines information retrieval with language model generation to provide grounded, factual responses by retrieving relevant documents before generating answers.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 2,
+        "question": "How do evaluation metrics for generative AI differ from traditional machine learning metrics?",
+        "source": "PDF-based",
+        "expected_keywords": ["semantic", "BLEU", "ROUGE", "factuality", "fluency", "generative"],
+        "ground_truth_summary": "Generative AI metrics focus on semantic meaning, fluency, and factuality rather than exact match, including BLEU, ROUGE, and newer semantic similarity measures.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 3,
+        "question": "What is a golden test set and why is it important for evaluating LLMs?",
+        "source": "PDF-based",
+        "expected_keywords": ["golden", "ground truth", "reference", "benchmark", "quality", "curated"],
+        "ground_truth_summary": "A golden test set is a carefully curated collection of questions with verified ground truth answers, used as a benchmark to evaluate LLM performance consistently and reliably.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 4,
+        "question": "What is the difference between factuality and hallucination in LLM outputs?",
+        "source": "PDF-based",
+        "expected_keywords": ["factuality", "hallucination", "grounded", "false", "fabricate", "verification"],
+        "ground_truth_summary": "Factuality measures whether an LLM's output is true and verifiable from source documents, while hallucination is when the model generates false or unsupported information.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 5,
+        "question": "How should temperature be set for deterministic evaluation of LLMs?",
+        "source": "PDF-based",
+        "expected_keywords": ["temperature", "0", "deterministic", "reproducible", "consistency"],
+        "ground_truth_summary": "Temperature should be set to 0 to make LLM outputs deterministic and reproducible, ensuring consistent results across multiple evaluation runs.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 6,
+        "question": "What are the key components of a ground truth curation process?",
+        "source": "PDF-based",
+        "expected_keywords": ["human", "annotation", "review", "quality", "consensus", "standards"],
+        "ground_truth_summary": "Ground truth curation involves human expert review, consistent annotation standards, quality checks, and often multiple-rater consensus to ensure accuracy.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 7,
+        "question": "Explain the concept of semantic similarity and how it's measured in evaluation.",
+        "source": "PDF-based",
+        "expected_keywords": ["semantic", "similarity", "embeddings", "cosine", "meaning", "context"],
+        "ground_truth_summary": "Semantic similarity measures whether two texts convey similar meaning using embedding-based approaches like cosine similarity on vector representations.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 8,
+        "question": "What is a pass/fail quality gate in LLM evaluation?",
+        "source": "PDF-based",
+        "expected_keywords": ["threshold", "criteria", "pass", "fail", "binary", "acceptance"],
+        "ground_truth_summary": "A quality gate is a predefined threshold or set of criteria that determines whether an LLM output passes (meets standards) or fails (unacceptable).",
+        "difficulty": "easy"
+      },
+      {
+        "id": 9,
+        "question": "How do you measure precision and recall in the context of LLM answer evaluation?",
+        "source": "PDF-based",
+        "expected_keywords": ["precision", "recall", "relevant", "complete", "information extraction"],
+        "ground_truth_summary": "Precision measures the proportion of generated information that is relevant and correct; recall measures the proportion of ground truth information that was included in the LLM response.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 10,
+        "question": "What role does human evaluation play alongside automatic metrics in LLM assessment?",
+        "source": "PDF-based",
+        "expected_keywords": ["human", "evaluation", "automatic", "metrics", "validation", "qualitative"],
+        "ground_truth_summary": "Human evaluation provides qualitative insights, validation of metric reliability, assessment of nuanced aspects like coherence, and verification of automated metric scores.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 11,
+        "question": "Describe the relationship between retrieval quality and answer quality in RAG systems.",
+        "source": "PDF-based",
+        "expected_keywords": ["retrieval", "answer quality", "relevant documents", "context", "correlation"],
+        "ground_truth_summary": "High retrieval quality (fetching relevant documents) is a prerequisite for high answer quality in RAG systems, as the generation can only work with retrieved content.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 12,
+        "question": "What are common failure modes when evaluating LLMs on domain-specific questions?",
+        "source": "PDF-based",
+        "expected_keywords": ["domain", "specialized", "terminology", "context", "hallucination", "out-of-domain"],
+        "ground_truth_summary": "Common failures include hallucinating domain-specific facts, misunderstanding specialized terminology, applying general knowledge inappropriately, and failing to admit knowledge gaps.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 13,
+        "question": "How should you handle questions where the ground truth answer is ambiguous or debatable?",
+        "source": "PDF-based",
+        "expected_keywords": ["ambiguous", "multiple answers", "acceptable", "criteria", "flexibility", "documentation"],
+        "ground_truth_summary": "Document acceptable answer variations, define clear criteria for what constitutes a correct answer, use multiple reference answers, and involve domain experts in judgment.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 14,
+        "question": "What is the BLEU score and when is it appropriate to use it for LLM evaluation?",
+        "source": "PDF-based",
+        "expected_keywords": ["BLEU", "n-gram", "overlap", "translation", "machine", "appropriate context"],
+        "ground_truth_summary": "BLEU score measures n-gram overlap between generated and reference text. It's useful for translation but less ideal for open-ended QA where multiple valid answers exist.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 15,
+        "question": "Explain how to measure response latency and its impact on user experience in deployed LLM systems.",
+        "source": "PDF-based",
+        "expected_keywords": ["latency", "response time", "performance", "user experience", "throughput"],
+        "ground_truth_summary": "Latency measures the time from query submission to response delivery. Lower latency is critical for user satisfaction, and should be evaluated alongside accuracy metrics.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 16,
+        "question": "What considerations should guide the selection of documents for a RAG evaluation test set?",
+        "source": "PDF-based",
+        "expected_keywords": ["document selection", "representation", "diversity", "difficulty", "edge cases"],
+        "ground_truth_summary": "Documents should be representative of real-world use cases, diverse in domain and complexity, include edge cases and long documents, and cover both easy and challenging scenarios.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 17,
+        "question": "How do you identify and categorize evaluation failures for improvement?",
+        "source": "PDF-based",
+        "expected_keywords": ["failure analysis", "categorize", "root cause", "improvement", "patterns"],
+        "ground_truth_summary": "Analyze failures by categorizing them (hallucination, retrieval failure, reasoning error), identify root causes, group by patterns, and prioritize high-impact improvements.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 18,
+        "question": "What is the purpose of using multiple evaluation metrics instead of a single metric?",
+        "source": "PDF-based",
+        "expected_keywords": ["multiple metrics", "comprehensive", "different aspects", "blind spots", "holistic"],
+        "ground_truth_summary": "Multiple metrics provide comprehensive evaluation by measuring different aspects (relevance, fluency, factuality), reducing blind spots from any single metric.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 19,
+        "question": "Describe best practices for developing a rubric to evaluate answer quality manually.",
+        "source": "PDF-based",
+        "expected_keywords": ["rubric", "criteria", "scoring", "consistency", "clear levels", "examples"],
+        "ground_truth_summary": "A good rubric defines clear scoring levels, provides specific criteria for each level, includes examples, and is refined through multiple human evaluators for consistency.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 20,
+        "question": "How should you balance model capacity (size) with evaluation performance in production deployment?",
+        "source": "PDF-based",
+        "expected_keywords": ["model size", "performance", "latency", "cost", "trade-off", "deployment"],
+        "ground_truth_summary": "Evaluate the trade-off between larger models (better quality) vs. smaller models (faster, cheaper), considering your accuracy requirements, latency constraints, and infrastructure costs.",
+        "difficulty": "hard"
+      },
+      {
+        "id": 21,
+        "question": "What is the capital of Mongolia?",
+        "source": "NOT in PDFs",
+        "expected_keywords": ["Ulaanbaatar"],
+        "ground_truth_summary": "This is general knowledge not related to PDF content. Answer should be 'Ulaanbaatar' or the LLM should answer from general knowledge.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 22,
+        "question": "Write a haiku about artificial intelligence.",
+        "source": "NOT in PDFs",
+        "expected_keywords": ["haiku", "5-7-5", "syllables", "AI", "creative"],
+        "ground_truth_summary": "This is a creative writing task not related to the PDFs. A correct response should be a valid haiku (5-7-5 syllables) about AI.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 23,
+        "question": "What are the top 3 largest economies by GDP in the world today?",
+        "source": "NOT in PDFs",
+        "expected_keywords": ["USA", "China", "Japan", "GDP", "economic"],
+        "ground_truth_summary": "General economic knowledge not in the PDFs. Should reflect recent data about world economies.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 24,
+        "question": "Compare the effectiveness of solar vs. wind energy for residential use.",
+        "source": "NOT in PDFs",
+        "expected_keywords": ["solar", "wind", "residential", "comparison", "energy", "efficiency"],
+        "ground_truth_summary": "Energy comparison topic not covered in the PDFs. Should provide balanced comparison of both technologies.",
+        "difficulty": "medium"
+      },
+      {
+        "id": 25,
+        "question": "Summarize recent breakthroughs in quantum computing from the past 6 months.",
+        "source": "NOT in PDFs",
+        "expected_keywords": ["quantum", "computing", "recent", "breakthrough", "technology"],
+        "ground_truth_summary": "Recent quantum computing news not in the PDFs. LLM should acknowledge it's beyond document scope or provide from training knowledge.",
+        "difficulty": "hard"
+      }
+    ]
+  }
+}

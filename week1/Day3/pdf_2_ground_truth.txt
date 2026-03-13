@@ -1,0 +1,506 @@
+================================================================================
+DOCUMENT 2: GROUND TRUTH CURATION & METRIC INTERPRETATION BEST PRACTICES
+(Simulating a 120-page PDF from AWS Machine Learning Blog)
+================================================================================
+
+CHAPTER 1: UNDERSTANDING GROUND TRUTH
+
+1.1 What is Ground Truth?
+
+Ground truth is the set of correct, reference answers that serve as the standard
+for evaluating system outputs. In the context of generative AI question-answering:
+
+Ground Truth = {
+  Questions with verified, authoritative answers
+  + Metadata about question difficulty
+  + Context about acceptable variations
+  + Documentation of edge cases
+}
+
+For RAG systems specifically, ground truth must include:
+- The expected answer
+- Which source documents should contain the answer
+- Any assumptions or constraints
+- Acceptable answer formats
+
+1.2 Why Golden Test Sets Matter
+
+Three critical reasons to invest in ground truth curation:
+
+1. BENCHMARKING
+   - Objective measurement of system improvement
+   - Fair comparison between different models
+   - Consistent evaluation across time
+
+2. DEBUGGING
+   - Identify systematic failure modes
+   - Understand why specific questions fail
+   - Prioritize improvements
+
+3. QUALITY ASSURANCE
+   - Gate system before deployment
+   - Monitor production performance
+   - Catch regressions early
+
+================================================================================
+CHAPTER 2: DESIGNING YOUR TEST SET
+
+2.1 Test Set Composition for RAG Systems
+
+Recommended breakdown for 25-question test set:
+
+DIFFICULTY DISTRIBUTION (by question complexity):
+- 40% Easy questions (8-10 questions)
+  * Simple factual lookup
+  * Clear single sentence answer
+  * High expected pass rate
+
+- 40% Medium questions (8-10 questions)
+  * Require synthesis from multiple documents
+  * Need reasoning or judgment
+  * Moderate expected pass rate
+
+- 20% Hard questions (5 questions)
+  * Edge cases or tricky wording
+  * Require deep understanding
+  * Low expected pass rate
+
+COVERAGE DISTRIBUTION (by category):
+- Domain questions: 70-80%
+  * Directly answerable from PDFs
+  * Test core retrieval & generation
+
+- Out-of-domain questions: 15-20%
+  * Not answerable from provided documents
+  * Test model's ability to admit knowledge gaps
+  * Test general capability
+
+- Adversarial questions: 5-10%
+  * Designed to trigger hallucination
+  * Ask about topics similar to but distinct from docs
+  * Test factual grounding
+
+2.2 Question Selection Criteria
+
+Each question should:
+✓ Be clearly worded and unambiguous
+✓ Have an objectively verifiable answer
+✓ Require information in a designated document
+✓ Cover important use cases
+✓ Be representative of real user queries
+
+Avoid:
+✗ Opinion-based questions
+✗ Questions answerable multiple ways with equal validity
+✗ Questions that conflict between documents
+✗ Trivial questions that aren't useful
+
+2.3 Test Set Design Patterns
+
+Pattern 1: DIRECT RETRIEVAL
+Q: "What is the definition of [term]?"
+Purpose: Test basic retrieval and definition copying
+Expected difficulty: Easy
+
+Pattern 2: SYNTHESIS
+Q: "What is the relationship between [concept A] and [concept B]?"
+Purpose: Test retrieval of multiple concepts and relationship reasoning
+Expected difficulty: Medium
+
+Pattern 3: NUMERICAL COMPUTATION
+Q: "Based on the data in the documents, calculate [metric]"
+Purpose: Test retrieval and numerical reasoning
+Expected difficulty: Hard
+
+Pattern 4: COUNTERFACTUAL
+Q: "What would happen if [condition] based on the principles in documents?"
+Purpose: Test understanding and application
+Expected difficulty: Hard
+
+Pattern 5: NEGATIVE
+Q: "Is [claim] supported by the documents? Why or why not?"
+Purpose: Test factuality and reasoning about what's NOT mentioned
+Expected difficulty: Medium-Hard
+
+================================================================================
+CHAPTER 3: ANNOTATION PROCESS & CONSENSUS
+
+3.1 Multi-Annotator Consensus Protocol
+
+Step 1: INDEPENDENT ANNOTATION
+- Each annotator reviews question independently
+- Creates ground truth answer + justification
+- No communication between annotators
+- Time: ~10-15 minutes per question per annotator
+
+Step 2: AGREEMENT CHECK
+- Compare answers across annotators
+- Flag disagreements for discussion
+- Typical agreement rate: 80-85% on well-designed questions
+
+Step 3: DISCUSSION & CONSENSUS
+- Discuss disagreements with full team
+- Document reasoning for final answer
+- Resolve through expert judgment
+- Time: ~5 minutes per disagreement
+
+Step 4: QUALITY REVIEW
+- Final reviewer checks all annotations
+- Spot-check process for quality
+- Ensures consistency
+- Time: ~3-5 minutes per question
+
+3.2 Managing Answer Variations
+
+For questions with multiple valid answers:
+
+EXPLICIT HANDLING:
+1. Document ALL acceptable answers
+2. Create decision rules for edge cases
+3. Define what makes an answer "correct"
+
+Example:
+Q: "Name three benefits of using RAG systems"
+Acceptable answers might include:
+- Grounding in up-to-date information
+- Reduced hallucination
+- Ability to cite sources
+- Better domain specific answers
+- Improved factuality
+- Flexibility to update documents
+
+Rule: "Answer is correct if it includes ANY 3 of these or equivalent ideas"
+
+REJECTION HANDLING:
+If multiple annotators can't agree on ANY answer:
+1. Revise the question for clarity
+2. Or exclude the question from the test set
+3. Document why the question was problematic
+
+================================================================================
+CHAPTER 4: METRIC INTERPRETATION FOR QUESTION ANSWERING
+
+4.1 Evaluating Relevance
+
+DEFINITION:
+Relevance measures how well the LLM response addresses the question.
+
+METRIC: SEMANTIC SIMILARITY SCORE (0-100)
+- How similar is the response to the ground truth in meaning?
+- NOT about exact word matching
+- Uses embeddings or semantic comparison
+
+INTERPRETATION GUIDE:
+90-100: Perfect match, comprehensive answer
+80-89:  Correct answer with minor omissions
+70-79:  Correct but some uncertainty or extra info
+60-69:  Generally correct but significant gaps
+50-59:  Partially relevant, missing key info
+<50:    Largely irrelevant to question
+
+RED FLAGS (indicates problem):
+- High relevance but low factuality → answer is relevant but wrong
+- Low relevance but high fluency → model talks around the issue
+- Relevance varies widely between similar questions → inconsistent understanding
+
+4.2 Evaluating Completeness
+
+DEFINITION:
+Completeness measures how much of the ground truth is covered in the response.
+
+METRIC: RECALL or KEYWORD COVERAGE (0-100%)
+- Percentage of key information from ground truth that appears in response
+- Measured using keyword presence or information extraction
+
+INTERPRETATION GUIDE:
+90-100: Includes all key points
+75-89:  Includes most key points
+60-74:  Includes several key points
+40-59:  Includes some key points
+<40:    Missing most information
+
+CONTEXT:
+- Fast queries often prefer shorter but complete answers (70% better than 100%)
+- Academic contexts may require 90%+
+- Executive summaries might be ~60% intentionally
+
+RED FLAGS:
+- High completeness but low quality → includes everything but inaccurately
+- Completeness varies with question difficulty → harder questions more incomplete
+- Model truncates long answers → context window issue
+
+4.3 Evaluating Factuality
+
+DEFINITION:
+Factuality measures whether claims in the response are true and supported.
+
+METRIC: FACTUALITY SCORE (0-100%)
+- Percentage of factual claims that are accurate and verifiable
+- Requires fact extraction then verification
+
+CALCULATION PROCESS:
+1. Extract all factual claims from response
+2. Check each claim against source documents
+3. Score = (# verified claims) / (total claims)
+
+EXAMPLE:
+Response: "RAG systems use retrieval for grounding. They were invented in 2020.
+They reduce hallucination significantly."
+
+Claims extracted:
+1. "RAG systems use retrieval for grounding" → VERIFIED (in docs)
+2. "RAG invented in 2020" → NOT VERIFIED (unclear from docs)
+3. "Reduces hallucination" → VERIFIED (in docs)
+
+Factuality Score: 2/3 = 66.7%
+
+INTERPRETATION GUIDE:
+95-100: Entirely factual
+85-94:  Minor unverified claims only
+75-84:  Few false claims
+50-74:  Mix of true and false
+<50:    Mostly false or unverifiable
+
+4.4 Hallucination Risk Assessment
+
+DEFINITION:
+Risk that the response contains fabricated information not present in documents.
+
+CATEGORIES:
+
+INTRINSIC HALLUCINATION
+- Model contradicts provided documents
+- Example: "Document says X but model says not-X"
+- Severity: CRITICAL
+
+EXTRINSIC HALLUCINATION
+- Model makes claims unsupported by documents
+- But not contradicting them either
+- Example: "Document mentions RAG, model adds specific date" (unverified)
+- Severity: HIGH
+
+FACTUAL VARIATION
+- Model uses different wording/phrasing
+- But same meaning as document
+- Severity: NONE (acceptable)
+
+METRIC: HALLUCINATION RISK SCORE (0-100, lower is better)
+- 0-10: No hallucination detected
+- 11-30: Minor unsupported claims
+- 31-60: Some potential hallucinations
+- 61-100: Significant hallucination risk
+
+DETECTION METHODS:
+1. Fact verification against source documents
+2. Semantic consistency check
+3. Specificity without basis (specific dates/numbers without source)
+4. Linguistic markers ("supposedly", "reportedly")
+
+================================================================================
+CHAPTER 5: QUALITY GATES AND PASS-FAIL CRITERIA
+
+5.1 Defining Acceptable Performance
+
+A quality gate is a threshold decision:
+- PASS if metric(s) >= threshold
+- FAIL otherwise
+
+SINGLE THRESHOLD GATE:
+Simple approach - one metric must exceed threshold
+
+Example:
+IF answer_quality >= 70 THEN PASS ELSE FAIL
+
+Pros: Simple to understand
+Cons: Ignores other aspects
+
+5.2 Multi-Metric Quality Gates
+
+COMPOUND GATE (AND logic):
+All metrics must pass
+
+IF (relevance >= 70 AND factuality >= 80 AND hallucination <= 30) THEN PASS
+
+Pros: High quality control
+Cons: Harder to pass, may be too strict
+
+WEIGHTED GATE:
+Composite score from multiple metrics
+
+quality_score = (relevance × 0.4) + (factuality × 0.3) + ((100-hallucination) × 0.3)
+IF quality_score >= 70 THEN PASS
+
+Pros: Balanced evaluation
+Cons: Requires tuning weights
+
+5.3 Calibrating Thresholds
+
+STEP 1: Establish baseline
+- Run 10-15 test questions
+- Score manually (human evaluation)
+- Calculate average scores
+
+STEP 2: Find threshold
+- Select threshold that matches "acceptable" human judgment
+- Typically 70-80 for quality scores
+- Lower for very difficult domains
+
+STEP 3: Validate
+- Test on additional questions
+- Adjust if too many false positives/negatives
+- Document final decision
+
+STEP 4: Monitor
+- Track actual pass rates over time
+- Re-calibrate quarterly
+- Adjust for changing requirements
+
+================================================================================
+CHAPTER 6: FAILURE MODES & ROOT CAUSE ANALYSIS
+
+6.1 Failure Categories
+
+RETRIEVAL FAILURES (No relevant documents found)
+- Symptom: Relevant information not in response
+- Cause: Search/ranking failed
+- Fix: Improve retrieval system
+- Frequency in RAG: 30-40% of failures
+
+GENERATION FAILURES (Bad answer despite good retrieval)
+- Symptom: Documents are relevant but answer is poor
+- Cause: LLM generation issue
+- Fix: Better prompt, different model, fine-tuning
+- Frequency in RAG: 40-50% of failures
+
+HALLUCINATION FAILURES (False information added)
+- Symptom: Response contains unsupported claims
+- Cause: Model making up information
+- Fix: Better grounding, constraints, fact-checking
+- Frequency in RAG: 20-30% of failures
+
+EDGE CASE FAILURES (Unusual inputs)
+- Symptom: Only fails on specific question types
+- Cause: Model not trained on this pattern
+- Fix: Add examples, use different approach
+- Frequency in RAG: 10-20% of failures
+
+6.2 Failure Analysis Template
+
+When a question fails, document:
+
+1. QUESTION: [Q#] [exact question text]
+
+2. GROUND TRUTH: [expected answer]
+
+3. MODEL RESPONSE: [actual response]
+
+4. PRIMARY FAILURE MODE:
+   ☐ Retrieval failure
+   ☐ Generation failure
+   ☐ Hallucination
+   ☐ Edge case
+
+5. ROOT CAUSE:
+   [Analysis: Why did this failure occur?]
+
+6. METRIC BREAKDOWN:
+   - Relevance: [score]
+   - Completeness: [score]
+   - Hallucination: [score]
+   - Quality Gate: FAIL
+
+7. FIX PRIORITY: [High/Medium/Low]
+
+8. SUGGESTED FIX:
+   [Specific action to prevent recurrence]
+
+================================================================================
+CHAPTER 7: COMPARING TWO MODELS
+
+7.1 Fair Comparison Methodology
+
+To compare Model A vs Model B:
+
+VARIABLE CONTROL:
+✓ Same questions (Question ID must match)
+✓ Same temperature (both = 0)
+✓ Same prompt/context
+✓ Same evaluation metrics
+✓ Same metric thresholds
+✓ Same rater for manual scores
+✗ Different retrieval systems (only compare generation)
+
+TIME CONSIDERATIONS:
+- Run evaluation in similar timeframe
+- Avoid comparing old vs new model on different test sets
+- Account for model updates/versions
+
+STATISTICAL SIGNIFICANCE:
+- If differences small: Run multiple times, calculate variance
+- If differences large: Single run often sufficient
+- Report confidence intervals, not just averages
+
+7.2 Metrics for Model Comparison
+
+AGGREGATE METRICS:
+1. Average Quality Score (0-100)
+2. Pass Rate (% passing quality gate)
+3. Average Relevance (0-100)
+4. Average Hallucination Risk (0-100, lower better)
+5. Average Response Latency (milliseconds)
+
+COMPARATIVE METRICS:
+- Metric Difference: Model B - Model A
+- Relative Improvement: (Model B - Model A) / Model A × 100%
+- Win/Loss: # questions where Model B better
+
+EXAMPLE COMPARISON TABLE:
+
+Metric                    Model A    Model B    Winner
+─────────────────────────────────────────────────────
+Avg Quality Score         72.3       78.5       B (+6.2)
+Pass Rate (Quality Gate)  64%        76%        B (+12%)
+Avg Relevance            73.1       79.2       B (+6.1)
+Avg Hallucination Risk    35.2       28.1       B (-7.1, better)
+Avg Latency (ms)         245        310        A (faster)
+─────────────────────────────────────────────────────
+
+================================================================================
+CHAPTER 8: PRODUCTION MONITORING
+
+8.1 Continuous Evaluation
+
+After deployment, evaluate on:
+- New data (unseen in test set)
+- Monthly/quarterly batches
+- User feedback loops
+
+Metrics to track:
+- Quality metrics trend (up/down over time)
+- Pass rate stability
+- Failure modes distribution
+- User satisfaction
+
+8.2 Retest Schedule
+
+INITIAL DEPLOYMENT:
+- Evaluate weekly for first month
+- Daily if any issues found
+- Baseline metrics established
+
+STABLE OPERATION:
+- Monthly evaluation batches
+- Quarterly deep-dive analysis
+- Annual test set refresh
+
+POST-UPDATE:
+- Full evaluation after model updates
+- A/B test on subset before full rollout (if possible)
+- Monitor for regressions
+
+================================================================================
+END OF DOCUMENT 2
+Total Content: ~120 pages (simulated)
+Topics Covered: Ground truth curation, metric interpretation, quality gates,
+failure analysis, model comparison methodology
+================================================================================

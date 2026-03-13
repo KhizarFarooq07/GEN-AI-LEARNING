@@ -1,0 +1,290 @@
+================================================================================
+DOCUMENT 1: COMPREHENSIVE RAG EVALUATION GUIDE
+(Simulating a 150-page PDF from Qdrant.tech RAG Evaluation Blog)
+================================================================================
+
+CHAPTER 1: INTRODUCTION TO RAG SYSTEMS
+
+Retrieval-Augmented Generation (RAG) represents a paradigm shift in how language models
+generate responses. Rather than relying solely on training data, RAG systems combine
+information retrieval with language model generation to provide responses grounded in
+actual documents.
+
+The core principle of RAG is simple yet powerful: retrieve relevant documents first,
+then generate answers based on that context. This approach addresses a critical limitation
+of traditional language models - their tendency to "hallucinate" or generate plausible-sounding
+but false information.
+
+================================================================================
+CHAPTER 2: FOUNDATIONS OF RAG EVALUATION
+
+2.1 Why Evaluate RAG Systems?
+
+RAG systems introduce complexity that standard LLM evaluation doesn't capture. You must
+evaluate not just the language model, but the entire pipeline:
+- Document retrieval quality
+- Ranking accuracy
+- Generation relevance
+- Factual correctness
+
+2.2 Core Principles of Ground Truth Curation
+
+A golden test set is the foundation of RAG evaluation. Creating one requires:
+
+1. Domain Expert Selection:
+   - Identify questions that matter to your use case
+   - Ensure questions cover diverse topics within the domain
+   - Include edge cases and challenging scenarios
+
+2. Multi-Stage Annotation Process:
+   - Multiple human annotators review each question-answer pair
+   - Consensus-based approach to resolve disagreements
+   - Quality assurance checks on all annotations
+
+3. Reference Answer Standards:
+   - Answers should be complete and accurate
+   - Include supporting evidence from documents
+   - Document constraints (e.g., "answer not in provided documents")
+
+4. Version Control:
+   - Track changes to the test set over time
+   - Maintain traceability of annotations
+   - Document rationale for difficult cases
+
+Creating a high-quality 25-question test set typically requires:
+- 2-4 hours for question selection
+- 4-6 hours for consensus-based annotation
+- 2-3 hours for quality review
+
+================================================================================
+CHAPTER 3: EVALUATION METRICS FOR RAG SYSTEMS
+
+3.1 Relevance-Based Metrics
+
+SEMANTIC SIMILARITY (0-1 scale, often reported as percentage)
+- Definition: Measures whether generated response semantically aligns with ground truth
+- Implementation: Embedding-based similarity using cosine distance
+- When to use: Essential for evaluating answer relevance
+- Limitations: Doesn't capture factual correctness
+
+Example:
+Ground Truth: "RAG systems combine retrieval and generation for grounded answers"
+Response: "Retrieval-augmented generation merges document search with LLM output"
+Semantic Similarity Score: 0.89 (89%)
+
+3.2 Factuality & Hallucination Detection
+
+FACTUALITY SCORE (0-100%)
+- Definition: Percentage of claims in the response that are supported by source documents
+- Implementation: Fact extraction then verification against documents
+- Critical for: High-stakes applications (medical, legal, financial)
+
+HALLUCINATION DETECTION
+- Type 1: Intrinsic hallucination - contradicts provided documents
+- Type 2: Extrinsic hallucination - unverifiable against documents
+- Severity levels: Minor inconsistency vs. Major false claim
+
+3.3 Completeness & Recall
+
+RECALL METRIC
+- Definition: What percentage of important information from ground truth is included in response?
+- Calculation: (# ground truth facts found in response) / (total ground truth facts)
+- Range: 0-100%
+
+3.4 Precision Metric
+
+PRECISION METRIC
+- Definition: What percentage of the response information is relevant and correct?
+- Calculation: (# correct facts in response) / (total facts in response)
+- Range: 0-100%
+
+================================================================================
+CHAPTER 4: IMPLEMENTING EVALUATION FRAMEWORKS
+
+4.1 Automatic Metric Calculation
+
+For a production RAG evaluation system:
+
+1. BLEU Score (bilingual evaluation understudy)
+   - Range: 0-100
+   - Pros: Fast computation, deterministic
+   - Cons: Penalizes synonyms, works poorly for open-ended QA
+   - Formula: n-gram overlap with reference
+
+2. ROUGE Score (recall-oriented understudy for gisting evaluation)
+   - ROUGE-1: Unigram overlap
+   - ROUGE-2: Bigram overlap
+   - ROUGE-L: Longest common subsequence
+   - Range: 0-100
+   - Better for summarization than open QA
+
+3. Semantic Similarity (Embedding-based)
+   - Uses pre-trained embeddings (Sentence-BERT, etc.)
+   - Cosine similarity between response and ground truth
+   - Range: 0-100 (after scaling)
+   - Best for general relevance evaluation
+
+4.2 Manual Evaluation (Human-in-the-Loop)
+
+Automatic metrics have limitations. Human evaluation captures:
+- Coherence and readability
+- Contextual appropriateness
+- Nuanced understanding
+- Creative correct answers
+
+Standard 5-point rating scale:
+- 5: Perfect, completely accurate and helpful
+- 4: Good, mostly accurate with minor issues
+- 3: Acceptable, mostly correct but some gaps
+- 2: Poor, significant errors or missing information
+- 1: Unacceptable, mostly incorrect
+
+================================================================================
+CHAPTER 5: TEMPERATURE AND DETERMINISM IN EVALUATION
+
+5.1 The Role of Temperature
+
+Temperature controls randomness in LLM output:
+- Temperature = 0: Deterministic (greedy decoding)
+  * Same input always produces same output
+  * Best for evaluation (reproducible results)
+  * Worst output diversity
+
+- Temperature = 0.7: Default balance
+  * Some randomness for variety
+  * NOT suitable for evaluation
+  * Results vary across runs
+
+- Temperature = 1.0+: Maximum randomness
+  * Different outputs every time
+  * Creative but unreliable
+  * Never use for evaluation
+
+5.2 Why Determinism Matters for Benchmarking
+
+When comparing two LLMs fairly:
+1. Set temperature = 0 for both
+2. Run evaluation at least 3 times on same test set
+3. Calculate mean and variance of each metric
+4. Use statistical tests for significance
+
+This ensures differences between models are real, not due to randomness.
+
+================================================================================
+CHAPTER 6: BUILDING YOUR FIRST EVALUATION PIPELINE
+
+6.1 Step-by-Step Implementation
+
+Step 1: Prepare Your Test Set
+- 25 questions minimum for meaningful evaluation
+- Mix of easy, medium, hard questions
+- Include out-of-domain questions to test boundaries
+
+Step 2: Define Evaluation Metrics
+- Pick 3-4 metrics covering different aspects
+- Document exactly how each is calculated
+- Set thresholds for "acceptable" performance
+
+Step 3: Run First Model
+- Query with temperature = 0
+- Capture full responses
+- Time each query (measure latency)
+
+Step 4: Run Second Model
+- Same questions, same temperature
+- Same output capture process
+- Ensure fair comparison environment
+
+Step 5: Score Each Response
+- Apply all metrics
+- Review edge cases manually
+- Document any ambiguities
+
+Step 6: Compare & Analyze
+- Calculate aggregate metrics
+- Identify failure patterns
+- Create improvement roadmap
+
+6.2 Quality Gates (Pass/Fail Criteria)
+
+A quality gate is a binary pass/fail check based on predefined thresholds:
+
+Simple Gate (Single Metric):
+- If semantic_similarity >= 70: PASS
+- If semantic_similarity < 70: FAIL
+
+Complex Gate (Multiple Metrics):
+- If (semantic_similarity >= 70 AND hallucination_risk <= 30): PASS
+- Otherwise: FAIL
+
+Threshold Selection:
+- Based on business requirements
+- Calibrated using human evaluation
+- Should be achievable but challenging
+
+================================================================================
+CHAPTER 7: FAILURE ANALYSIS AND IMPROVEMENT
+
+7.1 Categorizing Failures
+
+When a response fails quality gates, categorize as:
+
+1. RETRIEVAL FAILURES
+   - Correct documents weren't retrieved
+   - Wrong ranking of relevant docs
+   - Solution: Improve retrieval model
+
+2. GENERATION FAILURES
+   - Documents retrieved but answer is poor
+   - Model misunderstood the question
+   - Solution: Better prompting or fine-tuning
+
+3. HALLUCINATION
+   - Model added information not in docs
+   - Contradicted provided information
+   - Solution: Better grounding or constraints
+
+4. REASONING FAILURES
+   - Correct info retrieved but logical error
+   - Wrong conclusions drawn
+   - Solution: Better decomposition/steps
+
+7.2 Root Cause Analysis
+
+For each failure:
+1. Ask: What went wrong?
+2. Ask: Why did it go wrong?
+3. Ask: In how many cases does this occur?
+4. Prioritize fixes by impact
+
+================================================================================
+CHAPTER 8: ADVANCED TOPICS
+
+8.1 Context Window Challenges
+
+Large PDFs need careful document chunking:
+- Too small chunks: Loss of context
+- Too large chunks: Reduced retrieval precision
+- Optimal: 200-500 tokens per chunk
+- Must test chunk sizes with your metrics
+
+8.2 Long Document Handling
+
+When PDFs are 100+ pages:
+- Can't fit entire document in context
+- Retrieved chunks must be sufficient
+- Quality gates help identify when they're not
+- Consider hierarchical retrieval for very large docs
+
+8.3 Domain-Specific Evaluation
+
+For specialized domains:
+- Accuracy matters more than fluency
+- Domain expert review is mandatory
+- Create domain-specific rubrics
+- Consider allowing multiple correct answers
+
+================================================================================
+END OF DOCUMENT 1
+Total Content: ~150 pages (simulated)
+Topics Covered: RAG basics, evaluation metrics, test set creation, quality gates, failure analysis
