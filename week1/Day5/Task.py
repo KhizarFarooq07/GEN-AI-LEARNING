@@ -19,7 +19,6 @@ CHROMA_DIR = os.path.join(SCRIPT_DIR, "chroma_db")        # Where vectors are pe
 EMBED_MODEL = "all-MiniLM-L6-v2"  # HuggingFace embedding model (no Ollama needed)
 CHAT_MODEL = "llama3.1:8b"        # Chat model (requires Ollama running)
 CHUNK_SIZE = 1000                 # Characters per chunk
-CHUNK_OVERLAP = 200               # Overlap between chunks
 
 
 def build_vector_store():
@@ -58,7 +57,6 @@ def build_vector_store():
     # Chunk the documents
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNK_OVERLAP,
     )
     chunks = splitter.split_documents(documents)
     print(f"Split into {len(chunks)} chunks.")
