@@ -2,7 +2,6 @@ import sys
 import os
 import glob
 from langchain_community.document_loaders import DirectoryLoader, UnstructuredPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import ChatOllama
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -54,11 +53,17 @@ def build_vector_store():
         print("No documents found. Add files to the documents/ directory.")
         return None
 
-    # Chunk the documents
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=CHUNK_SIZE,
-    )
-    chunks = splitter.split_documents(documents)
+    # Chunk the documents - simple fixed-size chunking
+    chunks = []
+    for doc in documents:
+        content = doc.page_content
+        for i in range(0, len(content), CHUNK_SIZE):
+            chunk_text = content[i:i + CHUNK_SIZE]
+            chunk_doc = Document(
+                page_content=chunk_text,
+                metadata=doc.metadata
+            )
+            chunks.append(chunk_doc)
     print(f"Split into {len(chunks)} chunks.")
 
     # Embed and store
