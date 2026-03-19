@@ -1,0 +1,245 @@
+{
+  "timestamp": "2026-03-19T13:44:29.257513",
+  "evaluations": [
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 1,
+      "query": "What is prompt engineering and why is it important?",
+      "answer_preview": "According to the provided context, \"Prompt engineering is the practice of designing and refining the inputs (prompts) given to language models to achieve desired outputs.\" Additionally, it's described as an increasingly important skill due to the growing power of language models, where a well-engineered prompt can have a dramatic impact on output quality.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 2,
+      "query": "Explain the concept of fine-tuning in LLMs",
+      "answer_preview": "Fine-tuning is the process of taking a pre-trained language model and adapting it to perform well on a specific task or domain. Unlike training from scratch (which requires massive computational resources), fine-tuning leverages the general knowledge learned during pre-training and adjusts the model's weights for your specific use case.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 3,
+      "query": "Compare fine-tuning and prompt engineering approaches",
+      "answer_preview": "There is no information in the provided context that compares fine-tuning and prompt engineering approaches. The context only discusses prompt engineering techniques.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 4,
+      "query": "How do vector databases relate to RAG systems?",
+      "answer_preview": "The provided context does not contain enough information about the relationship between vector databases and RAG (Retrieval-Augmented Generation) systems. However, it is mentioned that RAG \"retrieves relevant documents or passages from a knowledge base\", which could potentially involve vector databases as they are described in the context as storing semantic representations rather than exact text, enabling more intuitive search experiences.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 5,
+      "query": "What is the recommended chunk size for RAG systems?",
+      "answer_preview": "According to the provided context, the optimal range for chunk size is 300-500 tokens (roughly 200-300 words).",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 6,
+      "query": "What embedding models are mentioned in the documents?",
+      "answer_preview": "The following embedding models are mentioned:\n\n1. Word2Vec (2013)\n2. GloVe\n3. BERT (2019) - specifically, it's mentioned as providing 384 or 768-dimensional contextual embeddings from transformer models.\n4. OpenAI text-embedding-3-small: 1536 dimensions\n5. E5-large: 1024 dimensions\n6. BAAI/bge: Specialized for semantic search\n7. Jina AI: Long document embeddings",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 7,
+      "query": "What is not mentioned in the documents?",
+      "answer_preview": "The following are not explicitly mentioned:\n\n1. The specific algorithms or models used for document retrieval.\n2. The evaluation of model performance, apart from metrics such as MRR, F1 Score, BLEU Score, ROUGE Score, METEOR Score, and BERTScore.\n\nHowever, it is worth noting that the documents do mention \"retrieval\" being used to augment smaller models, indicating that some form of document retrieval algorithm is likely being used.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 8,
+      "query": "Give me advanced tips for optimization",
+      "answer_preview": "Based on the provided context, I can suggest some advanced tips for optimization:\n\n* Use Mixed Precision Training to use float16 for computation and float32 for gradients. This can provide faster training times with less memory usage.\n* Employ Learning Rate Scheduling techniques such as Cosine annealing or Warmup + decay, which are particularly common in transformer training.\n* Consider using AdamW as the optimizer, which combines the benefits of Adam with weight decay.\n\nNote that these tips are based on the information provided and might not be comprehensive or up-to-date.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 9,
+      "query": "Create a workflow combining prompt engineering, fine-tuning, and RAG",
+      "answer_preview": "Based on the provided context, I can suggest a general outline for creating a workflow combining prompt engineering, fine-tuning, and Retrieval-Augmented Generation (RAG). However, please note that the context only provides general information about prompt engineering techniques and does not contain specific instructions or details about implementing RAG.\n\n**Workflow Outline:**\n\n1. **Prompt Engineering**:\n\t* Identify the specific task or problem you want to solve.\n\t* Use the best practices outlined in the document (e.g., be specific, provide context, show examples) to craft effective prompts for your language model.\n2. **Fine-Tuning**:\n\t* Preprocess and format your training data according to the fine-tuning requirements of your chosen language model.\n\t* Fine-tune the pre-trained language model on your task-specific dataset using a suitable fine-tuning framework (e.g., Hugging Face Transformers, PyTorch).\n3. **RAG Implementation**:\n\t* Integrate a retrieval component (e.g., a database or a knowledge graph) with a generative component (e.g., the fine-tuned language model).\n\t* Use techniques such as few-shot prompting or data augmentation to enhance the performance of your RAG system.\n\nWhile this outline provides a general framework, it is essential to consult additional resources and documentation for implementing RAG and fine-tuning in practice.",
+      "success": true
+    },
+    {
+      "strategy": "fixed",
+      "mode": "retrieval",
+      "query_num": 10,
+      "query": "What are the main challenges in building RAG systems?",
+      "answer_preview": "There is no mention of \"main challenges\" in the provided context. However, there is a section titled \"Common Pitfalls\" that could be related to potential issues or difficulties in building RAG systems.\n\nAlternatively, the text mentions that \"RAG systems retrieve relevant documents or passages from a knowledge base and use them as context to generate more accurate, factual, and up-to-date responses,\" which might suggest some challenges in implementing such a system. However, this is not explicitly stated in the provided text.\n\nIf you'd like, I can try to infer potential challenges based on the information given, but it would be speculative without explicit statements from the authors of the document.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 1,
+      "query": "What is prompt engineering and why is it important?",
+      "answer_preview": "According to the provided context:\n\nPrompt engineering is the practice of designing and refining the inputs (prompts) given to language models to achieve desired outputs. It's both an art and a science\u2014combining creativity with empirical validation.\n\nAs language models become more powerful, prompt engineering becomes increasingly important because it can significantly impact output quality. The difference between a vague prompt and a well-engineered one can be dramatic in terms of output quality.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 2,
+      "query": "Explain the concept of fine-tuning in LLMs",
+      "answer_preview": "Fine-tuning is the process of taking a pre-trained language model and adapting it to perform well on a specific task or domain by leveraging the general knowledge learned during pre-training and adjusting the model's weights for your specific use case.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 3,
+      "query": "Compare fine-tuning and prompt engineering approaches",
+      "answer_preview": "There is not enough information to answer this question. The provided context only discusses prompt engineering techniques, but it does not mention fine-tuning or compare the two approaches.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 4,
+      "query": "How do vector databases relate to RAG systems?",
+      "answer_preview": "There is no direct information in the provided context that explains how vector databases relate to RAG (Retriever-Augmented Generator) systems. The documents mention RAG systems and vector databases separately, but there is no explicit connection between them. However, it can be inferred that both concepts are related to improving search and retrieval processes for language model applications, as mentioned in the \"RAG Best Practices\" document: \"By grounding generation in retrieved documents... we can build more accurate, transparent, and trustworthy systems.\"",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 5,
+      "query": "What is the recommended chunk size for RAG systems?",
+      "answer_preview": "According to the provided text, the optimal range for chunk sizes in RAG systems is between 300-500 tokens (roughly 200-300 words).",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 6,
+      "query": "What embedding models are mentioned in the documents?",
+      "answer_preview": "According to the provided context, the following embedding models are mentioned:\n\n1. Word2Vec (2013)\n2. GloVe\n3. BERT (2019)\n4. OpenAI text-embedding-3-small (1536 dimensions)\n5. E5-large (1024 dimensions)\n6. BAAI/bge (specialized for semantic search)\n7. Jina AI (long document embeddings)",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 7,
+      "query": "What is not mentioned in the documents?",
+      "answer_preview": "I don't see any information that explicitly states what is NOT mentioned in the documents. The provided context appears to focus on explaining various concepts and best practices related to Retrieval-Augmented Generation (RAG) systems, but it does not explicitly state what is missing or omitted from the discussion.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 8,
+      "query": "Give me advanced tips for optimization",
+      "answer_preview": "Based on the provided context, the following are some advanced tips for optimization:\n\n1. **Mixed Precision Training**: Use float16 for computation and float32 for gradients. This technique is faster and requires less memory.\n2. **Task Specialization**: Optimize models for specific tasks (e.g., sentiment analysis, entity extraction, summarization) to improve performance.\n3. **Format Control**: Ensure outputs follow specific formats or templates to meet industry requirements.\n\nNote that the provided context does not contain more advanced optimization techniques beyond these suggestions.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 9,
+      "query": "Create a workflow combining prompt engineering, fine-tuning, and RAG",
+      "answer_preview": "Based on the provided context, there is not enough information to create a specific workflow combining prompt engineering, fine-tuning, and Retrieval-Augmented Generation (RAG). The context only mentions general best practices for prompt engineering, such as being intentional, specific, and iterative, but does not provide any details about fine-tuning or RAG.",
+      "success": true
+    },
+    {
+      "strategy": "overlap",
+      "mode": "retrieval",
+      "query_num": 10,
+      "query": "What are the main challenges in building RAG systems?",
+      "answer_preview": "The context does not mention specific \"main challenges\" in building RAG systems. However, it mentions that \"The field is rapidly evolving, with new techniques emerging regularly\", suggesting that one challenge might be keeping up with the latest developments and adapting to changing requirements.\n\nAdditionally, in the section on \"Common Pitfalls\", it suggests that there may be challenges related to implementation, but these are not explicitly stated as main challenges.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 1,
+      "query": "What is prompt engineering and why is it important?",
+      "answer_preview": "According to the provided context, prompt engineering is \"an increasingly important skill\" because language models are becoming more powerful. The difference between a vague prompt and a well-engineered one can be dramatic in terms of output quality.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 2,
+      "query": "Explain the concept of fine-tuning in LLMs",
+      "answer_preview": "Fine-tuning is the process of taking a pre-trained language model and adapting it to perform well on a specific task or domain. Unlike training from scratch (which requires massive computational resources), fine-tuning leverages the general knowledge learned during pre-training and adjusts the model's weights for your specific use case.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 3,
+      "query": "Compare fine-tuning and prompt engineering approaches",
+      "answer_preview": "There is no information in the provided context that compares fine-tuning and prompt engineering approaches. The document appears to focus on prompt engineering, providing general guidelines and tips for improving output quality with language models, but it does not mention fine-tuning or compare it to prompt engineering.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 4,
+      "query": "How do vector databases relate to RAG systems?",
+      "answer_preview": "Vector databases are used for efficient similarity search in RAG systems. They store embeddings and allow for fast retrieval of relevant documents based on these embeddings. \n\nIn the context of RAG Best Practices, it is mentioned that \"Stores embeddings for efficient similarity search.\"",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 5,
+      "query": "What is the recommended chunk size for RAG systems?",
+      "answer_preview": "According to the provided context, the recommended chunk size for RAG systems is in the optimal range of 300-500 tokens (roughly 200-300 words).",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 6,
+      "query": "What embedding models are mentioned in the documents?",
+      "answer_preview": "The document mentions several embedding models, including:\n\n1. Word2Vec (2013)\n\t* 300-dimensional word embeddings\n\t* Captured word relationships\n\t* Limited to individual words\n2. GloVe (alternative approach using matrix factorization)\n3. BERT (2019)\n\t* Contextual embeddings from transformer models\n\t* 384 or 768-dimensional\n\t* Understands context\n\t* Different embeddings for same word depending on usage\n\nIt also mentions \"Modern Embeddings\" (2023+), but it does not provide any specific details about these models.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 7,
+      "query": "What is not mentioned in the documents?",
+      "answer_preview": "The provided documents do not mention what is not mentioned. The documents only describe best practices, evaluation metrics, core components, and file format considerations for RAG systems, but they do not explicitly discuss what is excluded or omitted from consideration.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 8,
+      "query": "Give me advanced tips for optimization",
+      "answer_preview": "Unfortunately, the provided context only contains general recommendations for hyperparameter selection and optimization techniques, but it does not contain \"advanced tips\" specific to optimization.\n\nHowever, it does mention \"Learning Rate Scheduling\" as one of the optimization techniques. This includes options like:\n\n* Constant: Maintain fixed learning rate\n* Linear decay: Gradually decrease over training\n* Cosine annealing: Decreasing then slightly increasing curve\n* Warmup + decay: Common for transformer training\n\nThese might be considered some form of \"advanced tip\", but it's more of an intermediate level recommendation rather than advanced.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 9,
+      "query": "Create a workflow combining prompt engineering, fine-tuning, and RAG",
+      "answer_preview": "I don't see any information about creating a workflow or the specific steps involved in combining prompt engineering, fine-tuning, and RAG (Reasoning Augmentation with Graphs). The provided context only seems to be about various techniques for effective prompting for language models. However, I can tell you that it mentions an experimental process of treating prompt engineering as iterative.",
+      "success": true
+    },
+    {
+      "strategy": "recursive",
+      "mode": "retrieval",
+      "query_num": 10,
+      "query": "What are the main challenges in building RAG systems?",
+      "answer_preview": "The context does not explicitly mention the main challenges in building RAG systems. However, it mentions \"Common Pitfalls\" as a section in the document, implying that there may be difficulties or issues associated with building RAG systems, but this is not explicitly stated.",
+      "success": true
+    }
+  ]
+}
