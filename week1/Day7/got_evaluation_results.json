@@ -1,0 +1,603 @@
+{
+  "dataset": "game-of-thrones",
+  "timestamp": "2026-03-24T21:22:01.225265",
+  "model": "llama3.1:8b",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "total_queries": 10,
+  "evaluations": [
+    {
+      "query_num": 1,
+      "question": "Who is the rightful heir to the Iron Throne?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "30_List_of_A_Song_of_Ice_and_Fire_characters.txt",
+            "51_Iron_Throne__A_Song_of_Ice_and_Fire_.txt",
+            "195_World_of_A_Song_of_Ice_and_Fire.txt"
+          ],
+          "categories": [
+            "politics",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 2,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "The context does not contain enough information to determine who is the rightful heir to the Iron Throne. The passage mentions that Robb Stark is proclaimed King in the North and Balon Greyjoy desires to recover the sovereignty of the Iron Islands, b",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "30_List_of_A_Song_of_Ice_and_Fire_characters.txt",
+            "51_Iron_Throne__A_Song_of_Ice_and_Fire_.txt",
+            "195_World_of_A_Song_of_Ice_and_Fire.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "family",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 4,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "Unfortunately, based on the provided context, there is no clear indication of who the rightful heir to the Iron Throne is. The text mentions that Robert Baratheon, a member of House Targaryen, seized control of six of the Seven Kingdoms and became Ki",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 2,
+      "question": "Describe the major battles in Game of Thrones",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "460_Battle_of_the_Bastards.txt",
+            "7_The_Spoils_of_War__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 4,
+          "unique_categories": 1,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "Based on the provided context, I can only mention two specific battles:\n\n1. The Dragon/Dothraki battle down in The Reach, which occurred in \"The Spoils of War\" (Season 6, Episode 7). This battle was described by Matt Fowler as one of the most grippin",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "460_Battle_of_the_Bastards.txt",
+            "7_The_Spoils_of_War__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "politics",
+            "general",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 9,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "Based on the provided context, I can describe a few notable battles:\n\n* The Dragon/Dothraki battle down in The Reach (depicted in \"The Spoils of War\") was one of the most gripping and magnificent ones to date.\n* The wildling army's attack on Castle B",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 3,
+      "question": "What are the main houses and their sigils?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "454_Music_of_Game_of_Thrones.txt",
+            "349_List_of_Game_of_Thrones_characters.txt"
+          ],
+          "categories": [
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 4,
+          "unique_categories": 1,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "According to the provided context, only one house is mentioned with information about its sigil:\n\n* House Tyrell: The golden rose on a green field.\n\nThe other houses (Baratheon, Arryn) have no additional information beyond being listed as houses.",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 7,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 3,
+          "query_rewrites": 3,
+          "top_sources": [
+            "454_Music_of_Game_of_Thrones.txt",
+            "349_List_of_Game_of_Thrones_characters.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 9,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Unfortunately, based on the provided context, I can only answer with certainty about one house:\n\n* The Tyrells have a golden rose as their coat of arms.\n\nHowever, I can infer that there is at least one other Great House mentioned in the text, which i",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 4,
+      "question": "Tell me about the White Walkers and the threat from the North",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "1_Dragonstone__Game_of_Thrones_episode_.txt",
+            "435_White_Walker.txt",
+            "515_The_Door__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "According to the provided context, it appears that the White Walkers were created by the Children of the Forest to protect them from humanity. This implies a long-standing conflict between the two species, with the White Walkers being a supernatural ",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "1_Dragonstone__Game_of_Thrones_episode_.txt",
+            "435_White_Walker.txt",
+            "515_The_Door__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "family",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 4,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "Based on the provided context, here's what we know about the White Walkers and the threat from the North:\n\n* The White Walkers are a supernatural threat to humankind.\n* They were created by the Children of the Forest to protect them from humans. (Acc",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 5,
+      "question": "How did Ned Stark die and what were the consequences?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "341_Ned_Stark.txt",
+            "197_A_Game_of_Thrones.txt"
+          ],
+          "categories": [
+            "politics",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 4,
+          "unique_categories": 2,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "I'm afraid I have to say that based on the provided context from Season 1, I don't have enough information to answer your question about how Ned Stark died. The text only mentions that Robert Baratheon asks Ned to become Hand of the King after Jon Ar",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "341_Ned_Stark.txt",
+            "197_A_Game_of_Thrones.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 9,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "Sorry, I'm a Game of Thrones expert, but it seems that the provided context doesn't contain enough information to answer the question about how Ned Stark died and the consequences. The text only provides background information on Ned's arrival in Kin",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 6,
+      "question": "Explain the relationship between Jon Snow and Daenerys Targaryen",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "11_The_Dragon_and_the_Wolf.txt",
+            "400_Winterfell__Game_of_Thrones_episode_.txt",
+            "207_Jon_Snow__character_.txt"
+          ],
+          "categories": [
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 1,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "According to the provided context, Jon Snow (Aegon Targaryen) and Daenerys Targaryen's relationship develops as they spend time together at Winterfell. They ride dragons together, deepening their bond, and eventually give in to their growing feelings",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "11_The_Dragon_and_the_Wolf.txt",
+            "400_Winterfell__Game_of_Thrones_episode_.txt",
+            "207_Jon_Snow__character_.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 3
+        },
+        "answer_preview": "Based on the provided context, here's an explanation of the relationship between Jon Snow and Daenerys Targaryen:\n\nJon Snow (who is revealed to be Aegon Targaryen) has a familial connection to Daenerys through his mother Lyanna Stark, who was the sis",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 7,
+      "question": "What happened to the dragons and how were they used?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "148_Game_of_Thrones__Winter_Is_Coming.txt",
+            "10_Beyond_the_Wall__Game_of_Thrones_.txt",
+            "349_List_of_Game_of_Thrones_characters.txt"
+          ],
+          "categories": [
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 1,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Unfortunately, there is not enough information in the provided context to answer this question. The context mentions the possibility of obtaining a dragon in a game, but it does not provide any information about what actually happened to the dragons ",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "148_Game_of_Thrones__Winter_Is_Coming.txt",
+            "10_Beyond_the_Wall__Game_of_Thrones_.txt",
+            "349_List_of_Game_of_Thrones_characters.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "family",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 4,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Unfortunately, the provided context does not contain enough information to answer the question. It mentions a game where you can obtain and raise a dragon, but it doesn't describe what happens to the dragon or how it is used in the Game of Thrones st",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 8,
+      "question": "Describe the political intrigue in King's Landing",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "40_Stannis_Baratheon.txt",
+            "425_No_One__Game_of_Thrones_.txt",
+            "195_World_of_A_Song_of_Ice_and_Fire.txt"
+          ],
+          "categories": [
+            "politics",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 2,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Based on the provided context, it appears that there isn't enough information to accurately describe the political intrigue in King's Landing. The passage only mentions a brief event involving Stannis' defeat and Tyrion Lannister's use of wildfire, b",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 7,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 3,
+          "query_rewrites": 3,
+          "top_sources": [
+            "40_Stannis_Baratheon.txt",
+            "425_No_One__Game_of_Thrones_.txt",
+            "195_World_of_A_Song_of_Ice_and_Fire.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Based on the provided context, I can only say that there is no information about the political intrigue in King's Landing. The text appears to be a collection of formatting and development notes for an article or chapter about Game of Thrones, but it",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 9,
+      "question": "What were the major plot twists in Game of Thrones?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "97_Tyrion_Lannister.txt",
+            "0_Game_of_Thrones__season_8_.txt",
+            "450_Baelor.txt"
+          ],
+          "categories": [
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 1,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "Based on the provided context from Game of Thrones, some of the major plot twists include:\n\n* The framing of Tyrion Lannister for the attempt on Bran Stark's life\n* The downfall of Lord Eddard Stark (including his imprisonment and beheading by King J",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 7,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 3,
+          "query_rewrites": 3,
+          "top_sources": [
+            "97_Tyrion_Lannister.txt",
+            "0_Game_of_Thrones__season_8_.txt",
+            "450_Baelor.txt"
+          ],
+          "categories": [
+            "politics",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 2,
+          "avg_relevance_keywords": 2
+        },
+        "answer_preview": "According to the provided context, some major plot points that can be identified as plot twists are:\n\n* The framing of Tyrion Lannister for the attempt on Bran Stark's life (context mentions it but doesn't go into detail)\n* The downfall of Lord Eddar",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    },
+    {
+      "query_num": 10,
+      "question": "How did the series end for the main characters?",
+      "baseline": {
+        "details": {
+          "method": "baseline",
+          "queries_used": 1,
+          "documents_retrieved": 5,
+          "top_sources": [
+            "410_The_Bells__Game_of_Thrones_.txt",
+            "11_The_Dragon_and_the_Wolf.txt",
+            "411_The_Iron_Throne__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "politics",
+            "family",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 5,
+          "unique_sources": 5,
+          "unique_categories": 3,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Unfortunately, there isn't enough information in the provided context to answer how the series ended for the main characters. The text mentions Bran's ascension to the Iron Throne \"made perfect sense\" thematically, but it doesn't explicitly state wha",
+        "success": true
+      },
+      "optimized": {
+        "details": {
+          "method": "optimized",
+          "queries_used": 5,
+          "documents_retrieved": 10,
+          "hyde_docs_generated": 1,
+          "query_rewrites": 3,
+          "top_sources": [
+            "410_The_Bells__Game_of_Thrones_.txt",
+            "11_The_Dragon_and_the_Wolf.txt",
+            "411_The_Iron_Throne__Game_of_Thrones_.txt"
+          ],
+          "categories": [
+            "politics",
+            "magic",
+            "family",
+            "battles"
+          ]
+        },
+        "quality_metrics": {
+          "num_docs": 10,
+          "unique_sources": 10,
+          "unique_categories": 4,
+          "avg_relevance_keywords": 1
+        },
+        "answer_preview": "Unfortunately, the provided context does not contain enough information to answer the question about how the series ended for the main characters. It mentions Bran's ascension as making \"perfect sense\" thematically, but it does not describe what happ",
+        "success": true
+      },
+      "improvement": {
+        "doc_count": 5,
+        "keyword_relevance": 0,
+        "source_diversity": 5
+      }
+    }
+  ]
+}
