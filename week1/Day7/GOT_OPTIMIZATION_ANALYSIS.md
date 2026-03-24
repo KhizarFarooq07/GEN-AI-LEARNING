@@ -328,11 +328,6 @@ This analysis compares **Baseline Retrieval** vs **Optimized Retrieval (HyDE + M
 - **Best Use Case**: Knowledge bases with diverse content types and multiple valid retrieval paths
 - **Poor Use Case**: Sparse or meta-focused datasets
 
-### Future Improvements:
-1. Use relevance scoring beyond keyword overlap (embeddings similarity, semantic distance)
-2. Add dataset preprocessing to extract key narrative elements
-3. Implement feedback loops: Learn which query rewrite patterns work best
-4. Filter optimization for queries where it helps (detect early if data is insufficient)
 
 ---
 
