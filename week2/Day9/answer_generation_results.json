@@ -1,0 +1,422 @@
+{
+  "timestamp": "2026-03-27T11:59:07.006703",
+  "dataset": "game-of-thrones",
+  "models": {
+    "embedding": "all-MiniLM-L6-v2",
+    "chat": "llama3.1:8b"
+  },
+  "configuration": {
+    "k_retrieve": 5,
+    "chunk_size": 1000,
+    "chunk_overlap": 200
+  },
+  "total_queries": 10,
+  "evaluations": [
+    {
+      "query_num": 1,
+      "question": "Who is the rightful heir to the Iron Throne?",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "The question of who is the rightful heir to the Iron Throne is a complex one, as it depends on one's interpretation of the laws of succession in Westeros. However, according to the context provided, Aegon the Conqueror established the Targaryen dynasty as the ruling family of the Seven Kingdoms after conquering six of the seven kingdoms. Therefore, it can be argued that a true heir to the Iron Throne would come from House Targaryen. This is supported by the fact that the Targaryens have been the ruling power for centuries and have had a claim to the throne since Aegon's conquest.",
+            "citations": [
+              "Aegon had established King's Landing as the royal capital, and the Iron Throne itself sits in the Red Keep",
+              "Aegon the Conqueror extinguished Harren the Black's line"
+            ],
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 818,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The question of who is the rightful heir to the Iron Throne is a complex one, as it depends on one's interpretation of the laws of succession in Westeros. However, according to the context provided, Aegon the Conqueror established the Targaryen dynasty as the ruling family of the Seven Kingdoms after conquering six of the seven kingdoms. Therefore, it can be argued that a true heir to the Iron Throne would come from House Targaryen. This is supported by the fact that the Targaryens have been the ruling power for centuries and have had a claim to the throne since Aegon's conquest.\",\n    \"citations\": [\"Aegon had established King's Landing as the royal capital, and the Iron Throne itself sits in the Red Keep\", \"Aegon the Conqueror extinguished Harren the Black's line\"],\n    \"confidence\": 0.9\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "Aegon's descendants are considered the rightful heirs to the Iron Throne [CITATION_1], although the current ruler, Joffrey Baratheon, has a tenuous claim through his mother Cersei Lannister who was married to Robert Baratheon, the king of Westeros at the time [CITATION_2].",
+            "citations": {
+              "[CITATION_1]": "Aegon had established King's Landing as the royal capital, and the Iron Throne itself sits in the Red Keep.",
+              "[CITATION_2]": "Centuries later, kings still cut themselves on the throne; it is a common belief that such rulers are therefore unfit to rule."
+            },
+            "confidence": 0.8
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1014,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"Aegon's descendants are considered the rightful heirs to the Iron Throne [CITATION_1], although the current ruler, Joffrey Baratheon, has a tenuous claim through his mother Cersei Lannister who was married to Robert Baratheon, the king of Westeros at the time [CITATION_2].\",\n    \"citations\": {\n        \"[CITATION_1]\": \"Aegon had established King's Landing as the royal capital, and the Iron Throne itself sits in the Red Keep.\",\n        \"[CITATION_2]\": \"Centuries later, kings still cut themselves on the throne; it is a common belief that such rulers are therefore unfit to rule.\"\n    },\n    \"confidence\": 0.8\n}\n\nNote: The confidence level is set to 0.8 because while there is evidence of Aegon's descendants being considered rightful heirs to the Iron Throne, the question does not provide information about the current ruler or the genealogy of Joffrey Baratheon and Cersei Lannister. Additionally, the context does not explicitly mention a clear heir to the throne at this point in the story."
+          }
+        }
+      }
+    },
+    {
+      "query_num": 2,
+      "question": "Describe the major battles in Game of Thrones",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "The major battles in Game of Thrones include the Battle of Blackwater Bay, the Battle of the Wall, Hardhome, The Spoils of War, and the Battle of the Bastards. These epic clashes showcase the show's ability to craft intense and visually stunning action sequences. For example, 'Hardhome' is described by IGN as one of the most gripping and magnificent battles to date, rivaling the Dragon/Dothraki battle in terms of spectacle (citations: [spoils_of_war], [hardhome]). Another notable battle is the Battle of the Bastards, where Jon Snow and Sansa Stark lead their forces against Ramsay Bolton's army, with Miguel Sapochnik's direction creating a 'terrifying, gripping and exhilarating' sequence (citations: [battle_of_the_bastards]). These battles often mark pivotal moments in the story and feature major characters on both sides of the fight. IGN notes that this pattern of tragic death and amazing battle seems to repeat itself in each season's ninth episode, as seen in Season 6 with 'Battle of the Bastards' (citations: [pattern_of_battles]).",
+            "citations": [
+              "spoils_of_war",
+              "hardhome",
+              "battle_of_the_bastards",
+              "pattern_of_battles"
+            ],
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 1187,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The major battles in Game of Thrones include the Battle of Blackwater Bay, the Battle of the Wall, Hardhome, The Spoils of War, and the Battle of the Bastards. These epic clashes showcase the show's ability to craft intense and visually stunning action sequences. For example, 'Hardhome' is described by IGN as one of the most gripping and magnificent battles to date, rivaling the Dragon/Dothraki battle in terms of spectacle (citations: [spoils_of_war], [hardhome]). Another notable battle is the Battle of the Bastards, where Jon Snow and Sansa Stark lead their forces against Ramsay Bolton's army, with Miguel Sapochnik's direction creating a 'terrifying, gripping and exhilarating' sequence (citations: [battle_of_the_bastards]). These battles often mark pivotal moments in the story and feature major characters on both sides of the fight. IGN notes that this pattern of tragic death and amazing battle seems to repeat itself in each season's ninth episode, as seen in Season 6 with 'Battle of the Bastards' (citations: [pattern_of_battles]).\",\n    \"citations\": [\"spoils_of_war\", \"hardhome\", \"battle_of_the_bastards\", \"pattern_of_battles\"],\n    \"confidence\": 1.0\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "The major battles in Game of Thrones include the 'Dragon/Dothraki battle' down in The Reach, in \"The Spoils of War\" [CITATION_1], which was described as one of the most gripping and magnificent ones to date by Matt Fowler of IGN, possibly rivaling \"Hardhome\" in terms of spectacle [CITATION_2]. Additionally, there is the 'Battle of the Bastards' [CITATION_3], which saw Jon Snow and Sansa Stark's forces overcome huge odds to reclaim Winterfell with the help of the Knights of the Vale [CITATION_4].",
+            "citations": {
+              "[CITATION_1]": "The past three 'Thrones' episodes now have ended with big action set pieces, but the Dragon/Dothraki battle down in The Reach, in \"The Spoils of War,\" was one of the most gripping and magnificent ones to date.",
+              "[CITATION_2]": "It may even rival \"Hardhome\" in terms of spectacle.",
+              "[CITATION_3]": "Jon Snow and Ramsay Bolton face off in a battle for control of Winterfell.",
+              "[CITATION_4]": "The battle culminates in Ramsay's defeat and capture."
+            },
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1075,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The major battles in Game of Thrones include the 'Dragon/Dothraki battle' down in The Reach, in \\\"The Spoils of War\\\" [CITATION_1], which was described as one of the most gripping and magnificent ones to date by Matt Fowler of IGN, possibly rivaling \\\"Hardhome\\\" in terms of spectacle [CITATION_2]. Additionally, there is the 'Battle of the Bastards' [CITATION_3], which saw Jon Snow and Sansa Stark's forces overcome huge odds to reclaim Winterfell with the help of the Knights of the Vale [CITATION_4].\",\n    \"citations\": {\n        \"[CITATION_1]\": \"The past three 'Thrones' episodes now have ended with big action set pieces, but the Dragon/Dothraki battle down in The Reach, in \\\"The Spoils of War,\\\" was one of the most gripping and magnificent ones to date.\",\n        \"[CITATION_2]\": \"It may even rival \\\"Hardhome\\\" in terms of spectacle.\",\n        \"[CITATION_3]\": \"Jon Snow and Ramsay Bolton face off in a battle for control of Winterfell.\",\n        \"[CITATION_4]\": \"The battle culminates in Ramsay's defeat and capture.\"\n    },\n    \"confidence\": 1.0\n}"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 3,
+      "question": "What are the main houses and their sigils?",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "The main houses mentioned in the text are House Baratheon, House Arryn, House Tyrell, House Gardener, House Targaryen, House Florent. Their sigils are not explicitly mentioned, but the descriptions of their seats and coats of arms provide some information: Highgarden (House Tyrell) displays a golden rose on a green field; although there is no direct mention of a sigil for House Baratheon or House Arryn.",
+            "citations": [
+              "House Baratheon",
+              "House Arryn",
+              "The game is played on a board that divides the continent of Westeros into several regions.",
+              "Highgarden where they reside as the Wardens of the South. Its coat of arms displays a golden rose on a green field"
+            ],
+            "confidence": 1
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 706,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n  \"answer\": \"The main houses mentioned in the text are House Baratheon, House Arryn, House Tyrell, House Gardener, House Targaryen, House Florent. Their sigils are not explicitly mentioned, but the descriptions of their seats and coats of arms provide some information: Highgarden (House Tyrell) displays a golden rose on a green field; although there is no direct mention of a sigil for House Baratheon or House Arryn.\",\n  \"citations\": [\"House Baratheon\", \"House Arryn\", \"The game is played on a board that divides the continent of Westeros into several regions.\", \"Highgarden where they reside as the Wardens of the South. Its coat of arms displays a golden rose on a green field\"],\n  \"confidence\": 1\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "The main houses mentioned are House Baratheon, House Arryn, and others such as Tyrell whose sigil is a golden rose on a green field [CITATION_1].",
+            "citations": {
+              "[CITATION_1]": "Its coat of arms displays a golden rose on a green field,"
+            },
+            "confidence": 0.5
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 484,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The main houses mentioned are House Baratheon, House Arryn, and others such as Tyrell whose sigil is a golden rose on a green field [CITATION_1].\",\n    \"citations\": {\n        \"[CITATION_1]\": \"Its coat of arms displays a golden rose on a green field,\"\n    },\n    \"confidence\": 0.5\n}\n\nNote: The confidence level is set to 0.5 because the context only mentions these three houses, but it is not explicitly stated that they are the only main houses in the Seven Kingdoms."
+          }
+        }
+      }
+    },
+    {
+      "query_num": 4,
+      "question": "Tell me about the White Walkers and the threat from the North",
+      "responses": {
+        "free-form": {
+          "output": null,
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 892,
+            "valid": false,
+            "error": "Invalid JSON: Expecting value: line 2 column 15 (char 16)",
+            "raw_response": "{\n    \"answer\": The White Walkers, also referred to as \"the Others\", pose a supernatural threat to humankind in Westeros. They dwell north of the Wall, a massive ice barrier, and are believed to have been created by the Children of the Forest to protect themselves from humanity. According to David Benioff, the White Walkers were not inherently evil, but rather a measure taken by the Children to defend against the threat posed by humans. The White Walkers' existence is shrouded in mystery, with recurring symbols and patterns hinting at their origins throughout the series. Their march south towards Westeros poses a significant threat to humanity, prompting Jon Snow's mission to capture a wight and ultimately unite the realm against this common enemy.\",\n    \"citations\": [\"David Benioff stated\", \"recurring symbols and patterns that recur throughout the show\"],\n    \"confidence\": 0.9\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": null,
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1374,
+            "valid": false,
+            "error": "Citation marker [CITATION_3] referenced but not used in answer",
+            "raw_response": "{\n  \"answer\": \"The White Walkers are a supernatural threat to humankind who dwell north of The Wall in Westeros [CITATION_1]. They were created by the Children of the Forest to protect them from mankind [CITATION_2, CITATION_3]. Their true nature was revealed through recurring symbols and patterns throughout the show [CITATION_4], which hinted at their connection to the Children. The White Walkers are also known as 'the Others' in the novels.\",\n  \"citations\": {\n    \"[CITATION_1]\": \"Primarily referred to as '''the Others''' in the novels, White Walkers are a supernatural threat to humankind who dwell north of The Wall in Westeros.\",\n    \"[CITATION_2]\": \"No one's innocent really in this world, and there was just something really beautifully right about the idea that the great nemesis of mankind were created to protect the Children of the Forest from mankind.\",\n    \"[CITATION_3]\": \"'The Night King, who's sort of the embodiment of absolute evil, what you're watching is the creation of that absolute evil, so the absolute evil isn't absolute after all.'\",\n    \"[CITATION_4]\": \"The first time we saw that was one of the very first scenes in the pilot, when Will the ranger sees the Wildling body parts in an odd pattern displayed by the White Walkers. We see it again north of the Wall with the dead horses displayed in a spiral pattern,\"\n  },\n  \"confidence\": 1.0\n}"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 5,
+      "question": "How did Ned Stark die and what were the consequences?",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "Ned Stark died by beheading at the orders of King Joffrey in King's Landing. This occurred after Ned had discovered that his children were fathered by Cersei, and he had made a public confession to save them from her wrath.",
+            "citations": [
+              "Ned is betrayed by Littlefinger, and the queen has him imprisoned for treason.",
+              "Joffrey has Ned beheaded anyway"
+            ],
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 593,
+            "valid": true,
+            "error": null,
+            "raw_response": "Here's my answer in the requested JSON format:\n\n{\n    \"answer\": \"Ned Stark died by beheading at the orders of King Joffrey in King's Landing. This occurred after Ned had discovered that his children were fathered by Cersei, and he had made a public confession to save them from her wrath.\",\n    \"citations\": [\"Ned is betrayed by Littlefinger, and the queen has him imprisoned for treason.\", \"Joffrey has Ned beheaded anyway\"],\n    \"confidence\": 1.0\n}\n\nI am very confident in this answer as it directly comes from the provided context about Ned's fate at the end of Season 1 of Game of Thrones."
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "Ned Stark was beheaded in King's Landing by order of Joffrey [CITATION_1] 'but Joffrey has Ned beheaded anyway.' (Season 1). This led to his wife Catelyn remaining behind with their sons, including Robb, and Ned's daughters Sansa and Arya departing for the capital city [CITATION_2] 'Upon arriving in King's Landing to take his post as Hand...' (Season 1).",
+            "citations": {
+              "[CITATION_1]": "but Joffrey has Ned beheaded anyway.",
+              "[CITATION_2]": "Upon arriving in King's Landing to take his post as Hand..."
+            },
+            "confidence": 0.8
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 575,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"Ned Stark was beheaded in King's Landing by order of Joffrey [CITATION_1] 'but Joffrey has Ned beheaded anyway.' (Season 1). This led to his wife Catelyn remaining behind with their sons, including Robb, and Ned's daughters Sansa and Arya departing for the capital city [CITATION_2] 'Upon arriving in King's Landing to take his post as Hand...' (Season 1).\",\n    \"citations\": {\n        \"[CITATION_1]\": \"but Joffrey has Ned beheaded anyway.\",\n        \"[CITATION_2]\": \"Upon arriving in King's Landing to take his post as Hand...\"\n    },\n    \"confidence\": 0.8\n}"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 6,
+      "question": "Explain the relationship between Jon Snow and Daenerys Targaryen",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "Jon Snow and Daenerys Targaryen have a romantic relationship that develops as they work together to fight the Night King. However, their intimacy is complicated by the fact that Jon is actually Aegon Targaryen, the legitimate son and heir of Rhaegar Targaryen (Daenerys' brother) and Lyanna Stark, making him Daenerys' nephew and a member of House Targaryen. This revelation creates tension in their relationship, as they are unknowingly related by blood.",
+            "citations": [
+              "Benioff continued by describing Jon and Daenery's intimacy as a complication 'on a political level,' and 'on a personal level,'",
+              "Weiss noted that it was important to make it clear 'that this was almost like an information bomb that Jon was heading towards'"
+            ],
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 780,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"Jon Snow and Daenerys Targaryen have a romantic relationship that develops as they work together to fight the Night King. However, their intimacy is complicated by the fact that Jon is actually Aegon Targaryen, the legitimate son and heir of Rhaegar Targaryen (Daenerys' brother) and Lyanna Stark, making him Daenerys' nephew and a member of House Targaryen. This revelation creates tension in their relationship, as they are unknowingly related by blood.\",\n    \"citations\": [\"Benioff continued by describing Jon and Daenery's intimacy as a complication 'on a political level,' and 'on a personal level,'\" , \"Weiss noted that it was important to make it clear 'that this was almost like an information bomb that Jon was heading towards'\"],\n    \"confidence\": 0.9\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "Jon Snow and Daenerys Targaryen are related by blood as they share a common ancestor in Rhaegar Targaryen, making Jon the true heir to House Targaryen [CITATION_1]. They also develop romantic feelings for each other, but their relationship is complicated due to their familial connection [CITATION_2].",
+            "citations": {
+              "[CITATION_1]": "Samwell Tarly learns that Jon was born Aegon Targaryen, the legitimate son and heir of Daenerys' brother Rhaegar Targaryen and Lyanna Stark.",
+              "[CITATION_2]": "Weiss noted that it was important to make it clear 'that this was almost like an information bomb that Jon was heading towards.' Benioff continued by describing Jon and Daenery's intimacy as a complication 'on a political level,' and 'on a personal level,' due to the two being related, with Weiss adding 'Just as we're seeing these two people come together we\u2019re hearing the information that will inevitably, if not tear them apart at least cause real problems in their relationship.'"
+            },
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1050,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"Jon Snow and Daenerys Targaryen are related by blood as they share a common ancestor in Rhaegar Targaryen, making Jon the true heir to House Targaryen [CITATION_1]. They also develop romantic feelings for each other, but their relationship is complicated due to their familial connection [CITATION_2].\",\n    \"citations\": {\n        \"[CITATION_1]\": \"Samwell Tarly learns that Jon was born Aegon Targaryen, the legitimate son and heir of Daenerys' brother Rhaegar Targaryen and Lyanna Stark.\",\n        \"[CITATION_2]\": \"Weiss noted that it was important to make it clear 'that this was almost like an information bomb that Jon was heading towards.' Benioff continued by describing Jon and Daenery's intimacy as a complication 'on a political level,' and 'on a personal level,' due to the two being related, with Weiss adding 'Just as we're seeing these two people come together we\u2019re hearing the information that will inevitably, if not tear them apart at least cause real problems in their relationship.'\"\n    },\n    \"confidence\": 1.0\n}"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 7,
+      "question": "What happened to the dragons and how were they used?",
+      "responses": {
+        "free-form": {
+          "output": null,
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 910,
+            "valid": false,
+            "error": "Invalid JSON: Expecting value: line 2 column 15 (char 16)",
+            "raw_response": "Here's my answer:\n\n{\n    \"answer\": The dragons in Game of Thrones were raised to be useful in battle after being hatched from eggs. However, one of them was killed by the Night King, which had a significant emotional impact on the viewers due to its importance to Daenerys. According to an interview, the intention was for this scene to be a \"one-two punch\" that would process the horror of seeing a dragon die and also reveal something even worse - the fact that the dragon became part of the Night King's army.\",\n    \"citations\": [\"The game starts after Eddard Stark dies\", \"the dragon would have 'a tremendous emotional impact', due to its importance to Daenerys\"],\n    \"confidence\": 0.8\n}\n\nNote: I've set my confidence level to 0.8 because while the context provides relevant information about the dragons, it does not explicitly state how the Night King killed one of them or how they were used in battle."
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "The dragons were obtained as eggs, hatched, and raised by Daenerys. They were later used in battle against the Night King's army, but ultimately one of them was killed when it was pulled out of the water and became a part of the Night King's army [CITATION_1]. The death of the dragon had a 'tremendous emotional impact' due to its importance to Daenerys [CITATION_2].",
+            "citations": {
+              "[CITATION_1]": "The game starts after Eddard Stark dies. It takes some days to play it to completion.",
+              "[CITATION_2]": "the dragon would have 'a tremendous emotional impact,' due to its importance to Daenerys."
+            },
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1140,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n  \"answer\": \"The dragons were obtained as eggs, hatched, and raised by Daenerys. They were later used in battle against the Night King's army, but ultimately one of them was killed when it was pulled out of the water and became a part of the Night King's army [CITATION_1]. The death of the dragon had a 'tremendous emotional impact' due to its importance to Daenerys [CITATION_2].\",\n  \"citations\": {\n    \"[CITATION_1]\": \"The game starts after Eddard Stark dies. It takes some days to play it to completion.\",\n    \"[CITATION_2]\": \"the dragon would have 'a tremendous emotional impact,' due to its importance to Daenerys.\"\n  },\n  \"confidence\": 0.9\n}\n\nNote: The confidence is set to 0.9 because the context doesn't provide information on how the dragons were used in battle against the Night King's army, but it does imply that they were used in such a way. If more information was available on this topic, the confidence would be higher.\n\nMissing information: \n- How the dragons were used in battle against the Night King's army\n- What happened to the other two dragons after one of them was killed and became part of the Night King's army"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 8,
+      "question": "Describe the political intrigue in King's Landing",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "King's Landing is a hotbed of political intrigue, with various factions vying for power. The city is surrounded by the City Watch, known as the gold cloaks, but within its walls, the Lannisters and their allies hold significant influence. However, tensions are high due to the presence of Stannis Baratheon's forces, who breach the walls in an attempt to overthrow King Joffrey. Despite being defeated, Stannis is convinced by Melisandre to continue fighting, fueled by her visions of a battle in the flames.",
+            "citations": [
+              "King's Landing",
+              "Stannis' force breaches the walls, but due to Tyrion Lannister's use of wildfire and the arrival of last-minute Lannister and Tyrell reinforcements, he is defeated.",
+              "Melisandre shows him a vision of a battle in the flames"
+            ],
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 865,
+            "valid": true,
+            "error": null,
+            "raw_response": "Here is the answer in the specified JSON format:\n\n{\n    \"answer\": \"King's Landing is a hotbed of political intrigue, with various factions vying for power. The city is surrounded by the City Watch, known as the gold cloaks, but within its walls, the Lannisters and their allies hold significant influence. However, tensions are high due to the presence of Stannis Baratheon's forces, who breach the walls in an attempt to overthrow King Joffrey. Despite being defeated, Stannis is convinced by Melisandre to continue fighting, fueled by her visions of a battle in the flames.\",\n    \"citations\": [\"King's Landing\", \"Stannis' force breaches the walls, but due to Tyrion Lannister's use of wildfire and the arrival of last-minute Lannister and Tyrell reinforcements, he is defeated.\", \"Melisandre shows him a vision of a battle in the flames\"],\n    \"confidence\": 0.9\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "King's Landing is home to a complex web of politics and intrigue due to its royal status as the capital of Westeros and the Seven Kingdoms [CITATION_1]. The city has an estimated population of 1 million people, with the main city surrounded by a wall manned by the City Watch of King's Landing, known as the gold cloaks [CITATION_2]. Within the walls, the city's natural landscape is dominated by three hills, named after Aegon and his two sister-wives Rhaenys and Visenya. However, there are no direct mentions of specific political intrigues within the provided context.",
+            "citations": {
+              "[CITATION_1]": "King's Landing is the royal capital of Westeros and the Seven Kingdoms.",
+              "[CITATION_2]": "The main city is surrounded by a wall, which is manned by the City Watch of King's Landing, which is nicknamed the gold cloaks, after the cloakes they wear."
+            },
+            "confidence": 0.5
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1263,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"King's Landing is home to a complex web of politics and intrigue due to its royal status as the capital of Westeros and the Seven Kingdoms [CITATION_1]. The city has an estimated population of 1 million people, with the main city surrounded by a wall manned by the City Watch of King's Landing, known as the gold cloaks [CITATION_2]. Within the walls, the city's natural landscape is dominated by three hills, named after Aegon and his two sister-wives Rhaenys and Visenya. However, there are no direct mentions of specific political intrigues within the provided context.\",\n    \"citations\": {\"[CITATION_1]\": \"King's Landing is the royal capital of Westeros and the Seven Kingdoms.\", \"[CITATION_2]\": \"The main city is surrounded by a wall, which is manned by the City Watch of King's Landing, which is nicknamed the gold cloaks, after the cloakes they wear.\"},\n    \"confidence\": 0.5\n}\n\nNote: I've provided an answer with [CITATION_N] markers, but the confidence level is set to 0.5 because there is no specific information about political intrigue in King's Landing within the provided context. The city's complex web of politics and intrigue is more generally stated, rather than being a detailed description of events or character interactions."
+          }
+        }
+      }
+    },
+    {
+      "query_num": 9,
+      "question": "What were the major plot twists in Game of Thrones?",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "The major plot twists in Game of Thrones include the framing of Tyrion Lannister for the attempt on Bran Stark's life, the downfall of Lord Eddard Stark after he is falsely accused of high treason and ultimately beheaded by King Joffrey Baratheon, the deaths of Lord Jon Arryn and King Joffrey Baratheon, and the War of the Five Kings. Additionally, significant plot twists involve Daenerys Targaryen's struggles with her dragon Rhaegal and the Battle of Winterfell.",
+            "citations": [
+              "the framing of Tyrion Lannister for the attempt on Bran Stark's life",
+              "Eddard Stark (Sean Bean), imprisoned and accused of high treason, struggling with the decision whether to falsely confess to save his daughters"
+            ],
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 747,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The major plot twists in Game of Thrones include the framing of Tyrion Lannister for the attempt on Bran Stark's life, the downfall of Lord Eddard Stark after he is falsely accused of high treason and ultimately beheaded by King Joffrey Baratheon, the deaths of Lord Jon Arryn and King Joffrey Baratheon, and the War of the Five Kings. Additionally, significant plot twists involve Daenerys Targaryen's struggles with her dragon Rhaegal and the Battle of Winterfell.\",\n    \"citations\": [\"the framing of Tyrion Lannister for the attempt on Bran Stark's life\", \"Eddard Stark (Sean Bean), imprisoned and accused of high treason, struggling with the decision whether to falsely confess to save his daughters\"],\n    \"confidence\": 0.9\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "The major plot twists in Game of Thrones include Ned Stark's downfall [CITATION_1], the framing of Tyrion Lannister for Bran Stark's life attempt [CITATION_2], Lord Jon Arryn's death, and King Joffrey Baratheon's death [CITATION_3].",
+            "citations": {
+              "[CITATION_1]": "the downfall of Lord Eddard Stark, the deaths of Lord Jon Arryn and King Joffrey Baratheon, and the War of the Five Kings.",
+              "[CITATION_2]": "including the framing of Tyrion Lannister for the attempt on Bran Stark's life",
+              "[CITATION_3]": "the deaths of Lord Jon Arryn and King Joffrey Baratheon"
+            },
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 639,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The major plot twists in Game of Thrones include Ned Stark's downfall [CITATION_1], the framing of Tyrion Lannister for Bran Stark's life attempt [CITATION_2], Lord Jon Arryn's death, and King Joffrey Baratheon's death [CITATION_3].\",\n    \"citations\": {\n        \"[CITATION_1]\": \"the downfall of Lord Eddard Stark, the deaths of Lord Jon Arryn and King Joffrey Baratheon, and the War of the Five Kings.\",\n        \"[CITATION_2]\": \"including the framing of Tyrion Lannister for the attempt on Bran Stark's life\",\n        \"[CITATION_3]\": \"the deaths of Lord Jon Arryn and King Joffrey Baratheon\"\n    },\n    \"confidence\": 1.0\n}"
+          }
+        }
+      }
+    },
+    {
+      "query_num": 10,
+      "question": "How did the series end for the main characters?",
+      "responses": {
+        "free-form": {
+          "output": {
+            "answer": "The series ended with Bran Stark being chosen as the new King of the Seven Kingdoms in a unanimous decision by the lords of the realm, after Jon Snow's true identity was revealed and he discovered that his parentage makes him ineligible for the Iron Throne. Daenerys Targaryen, who had been seeking to take the throne, was killed by Arya Stark in the penultimate episode, leaving Bran as the most suitable candidate. The Wall was destroyed at the end of the penultimate season, allowing the White Walker army to cross into Westeros.",
+            "citations": [
+              "Weiss noted",
+              "the conclusion of \"The Dragon and the Wolf\""
+            ],
+            "confidence": 1.0
+          },
+          "metadata": {
+            "prompt_type": "free-form",
+            "documents_retrieved": 5,
+            "raw_response_length": 658,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The series ended with Bran Stark being chosen as the new King of the Seven Kingdoms in a unanimous decision by the lords of the realm, after Jon Snow's true identity was revealed and he discovered that his parentage makes him ineligible for the Iron Throne. Daenerys Targaryen, who had been seeking to take the throne, was killed by Arya Stark in the penultimate episode, leaving Bran as the most suitable candidate. The Wall was destroyed at the end of the penultimate season, allowing the White Walker army to cross into Westeros.\",\n    \"citations\": [\"Weiss noted\", \"the conclusion of \\\"The Dragon and the Wolf\\\"\"],\n    \"confidence\": 1.0\n}"
+          }
+        },
+        "citation-enforced": {
+          "output": {
+            "answer": "The series ended with Bran Stark being elected as the King of the Seven Kingdoms, without a traditional coronation or triumphant ending, as per the show's anti-war and anti-despot themes [1]. This conclusion was consistent with the overall subject of the series - war, and its consequences, as noted by Lucy Mangan from The Guardian [2].",
+            "citations": {
+              "[1]": "After all the bloodshed, butchery and burning, ''Game of Thrones'' ended not with a bang but with a ballot.",
+              "[2]": "the finale just about delivered. It was true to the series' overall subject \u2013 war, and the pity of war"
+            },
+            "confidence": 0.9
+          },
+          "metadata": {
+            "prompt_type": "citation-enforced",
+            "documents_retrieved": 5,
+            "raw_response_length": 1126,
+            "valid": true,
+            "error": null,
+            "raw_response": "{\n    \"answer\": \"The series ended with Bran Stark being elected as the King of the Seven Kingdoms, without a traditional coronation or triumphant ending, as per the show's anti-war and anti-despot themes [1]. This conclusion was consistent with the overall subject of the series - war, and its consequences, as noted by Lucy Mangan from The Guardian [2].\",\n    \"citations\": {\n        \"[1]\": \"After all the bloodshed, butchery and burning, ''Game of Thrones'' ended not with a bang but with a ballot.\",\n        \"[2]\": \"the finale just about delivered. It was true to the series' overall subject \u2013 war, and the pity of war\"\n    },\n    \"confidence\": 0.9\n}\n\nNote: The context does not provide information on how all main characters ended up. While Bran's ascension is mentioned, other main characters like Arya, Sansa, Jon Snow, Daenerys Targaryen are not addressed explicitly. However, it is stated that the show's conclusion was consistent with its overall subject and themes, which suggests a coherent and meaningful ending for all characters, despite some viewers being disappointed or divided about certain plot developments."
+          }
+        }
+      }
+    }
+  ]
+}

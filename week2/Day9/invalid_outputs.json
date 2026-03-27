@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-03-27T11:59:07.006711",
+  "invalid_responses": [
+    {
+      "query_num": 4,
+      "question": "Tell me about the White Walkers and the threat from the North",
+      "prompt_type": "free-form",
+      "error": "Invalid JSON: Expecting value: line 2 column 15 (char 16)",
+      "raw_response_preview": "{\n    \"answer\": The White Walkers, also referred to as \"the Others\", pose a supernatural threat to humankind in Westeros. They dwell north of the Wall, a massive ice barrier, and are believed to have been created by the Children of the Forest to protect themselves from humanity. According to David B"
+    },
+    {
+      "query_num": 4,
+      "question": "Tell me about the White Walkers and the threat from the North",
+      "prompt_type": "citation-enforced",
+      "error": "Citation marker [CITATION_3] referenced but not used in answer",
+      "raw_response_preview": "{\n  \"answer\": \"The White Walkers are a supernatural threat to humankind who dwell north of The Wall in Westeros [CITATION_1]. They were created by the Children of the Forest to protect them from mankind [CITATION_2, CITATION_3]. Their true nature was revealed through recurring symbols and patterns t"
+    },
+    {
+      "query_num": 7,
+      "question": "What happened to the dragons and how were they used?",
+      "prompt_type": "free-form",
+      "error": "Invalid JSON: Expecting value: line 2 column 15 (char 16)",
+      "raw_response_preview": "Here's my answer:\n\n{\n    \"answer\": The dragons in Game of Thrones were raised to be useful in battle after being hatched from eggs. However, one of them was killed by the Night King, which had a significant emotional impact on the viewers due to its importance to Daenerys. According to an interview,"
+    }
+  ]
+}
