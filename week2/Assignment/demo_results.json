@@ -1,0 +1,201 @@
+{
+  "timestamp": "2026-03-28T14:56:36.125102",
+  "config": {
+    "embedding_model": "all-MiniLM-L6-v2",
+    "chat_model": "llama-3.1-8b-instant",
+    "vector_db": "FAISS",
+    "chunk_size": 1000
+  },
+  "demo_runs": [
+    {
+      "query": "Best budget hotels in Bangkok for backpackers",
+      "timestamp": "2026-03-28T14:56:36.125145",
+      "steps": {
+        "preferences": {
+          "cities": [
+            "Bangkok"
+          ],
+          "budget": "budget",
+          "interests": [
+            "sightseeing"
+          ],
+          "duration_days": null,
+          "other_keywords": [
+            "backpackers"
+          ]
+        },
+        "retrieval": {
+          "initial_retrieved": 10,
+          "after_filter": 4,
+          "final_returned": 4,
+          "urls_used": [
+            "https://en.wikipedia.org/wiki/Tokyo",
+            "https://en.wikipedia.org/wiki/Amsterdam",
+            "https://en.wikipedia.org/wiki/Amsterdam",
+            "https://en.wikipedia.org/wiki/Amsterdam"
+          ],
+          "cities": [
+            "tokyo",
+            "amsterdam"
+          ]
+        },
+        "quality_check": {
+          "status": "insufficient",
+          "confidence": 0.8,
+          "reason": "The context does not contain any information about budget hotels in Bangkok for backpackers. It appears to be a collection of unrelated travel-related facts and information about Amsterdam."
+        }
+      },
+      "answer": {
+        "answer": "I don't have enough information to answer: The context does not contain any information about budget hotels in Bangkok for backpackers. It appears to be a collection of unrelated travel-related facts and information about Amsterdam.. Please ask more specifically about a particular city, activity, or budget.",
+        "citations": [],
+        "confidence": 0.0,
+        "quality_status": "insufficient",
+        "valid": true
+      }
+    },
+    {
+      "query": "Where to find vegan food in Barcelona for under \u20ac10?",
+      "timestamp": "2026-03-28T14:56:37.755299",
+      "steps": {
+        "preferences": {
+          "cities": [
+            "Barcelona"
+          ],
+          "budget": "medium",
+          "interests": [
+            "food"
+          ],
+          "duration_days": null,
+          "other_keywords": [
+            "vegan",
+            "\u20ac10"
+          ]
+        },
+        "retrieval": {
+          "initial_retrieved": 10,
+          "after_filter": 10,
+          "final_returned": 5,
+          "urls_used": [
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona"
+          ],
+          "cities": [
+            "barcelona"
+          ]
+        },
+        "quality_check": {
+          "status": "insufficient",
+          "confidence": 0.8,
+          "reason": "The context provides information about Barcelona's livability, affordability, and geography, but lacks specific details about vegan food options and their prices."
+        }
+      },
+      "answer": {
+        "answer": "I don't have enough information to answer: The context provides information about Barcelona's livability, affordability, and geography, but lacks specific details about vegan food options and their prices.. Please ask more specifically about a particular city, activity, or budget.",
+        "citations": [],
+        "confidence": 0.0,
+        "quality_status": "insufficient",
+        "valid": true
+      }
+    },
+    {
+      "query": "Top 5 Michelin-starred restaurants in Tokyo",
+      "timestamp": "2026-03-28T14:56:38.934310",
+      "steps": {
+        "preferences": {
+          "cities": [
+            "Tokyo"
+          ],
+          "budget": "medium",
+          "interests": [
+            "food"
+          ],
+          "duration_days": null,
+          "other_keywords": []
+        },
+        "retrieval": {
+          "initial_retrieved": 10,
+          "after_filter": 10,
+          "final_returned": 5,
+          "urls_used": [
+            "https://en.wikipedia.org/wiki/Tokyo",
+            "https://en.wikipedia.org/wiki/Paris",
+            "https://en.wikipedia.org/wiki/Tokyo",
+            "https://en.wikipedia.org/wiki/Tokyo",
+            "https://en.wikipedia.org/wiki/Berlin"
+          ],
+          "cities": [
+            "berlin",
+            "tokyo",
+            "paris"
+          ]
+        },
+        "quality_check": {
+          "status": "insufficient",
+          "confidence": 0.4,
+          "reason": "The context mentions Michelin-starred restaurants, but only in relation to Paris and Berlin, not Tokyo."
+        }
+      },
+      "answer": {
+        "answer": "Some of the top 5 Michelin-starred restaurants in Tokyo include Sukiyabashi Jiro (3 stars), Narisawa (2 stars), Nihonryori Ryugin (2 stars), Narisawa (2 stars), and Sushi Saito (3 stars).",
+        "citations": [
+          "[227]",
+          "[227]"
+        ],
+        "confidence": 0.8,
+        "reasoning": "Based on the provided context, I have extracted the top 5 Michelin-starred restaurants in Tokyo. The information is sourced from the Wikipedia article on Tokyo, which mentions the number of Michelin-starred restaurants in Tokyo and some of the notable ones. However, the exact ranking and number of stars for each restaurant may not be available in the provided context, so I have provided a general answer based on the available information.",
+        "valid": true,
+        "quality_status": "insufficient"
+      }
+    },
+    {
+      "query": "Hiking trails near Dubai with water sports activities",
+      "timestamp": "2026-03-28T14:56:49.519249",
+      "steps": {
+        "preferences": {
+          "cities": [
+            "Dubai"
+          ],
+          "budget": "medium",
+          "interests": [
+            "hiking",
+            "water sports",
+            "adventure"
+          ],
+          "duration_days": null,
+          "other_keywords": []
+        },
+        "retrieval": {
+          "initial_retrieved": 10,
+          "after_filter": 10,
+          "final_returned": 5,
+          "urls_used": [
+            "https://en.wikipedia.org/wiki/Tokyo",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Barcelona",
+            "https://en.wikipedia.org/wiki/Tokyo"
+          ],
+          "cities": [
+            "tokyo",
+            "barcelona"
+          ]
+        },
+        "quality_check": {
+          "status": "insufficient",
+          "confidence": 0.7,
+          "reason": "The context provides information about various cities and their tourist attractions, but it does not specifically mention hiking trails near Dubai with water sports activities."
+        }
+      },
+      "answer": {
+        "answer": "I don't have enough information to answer: The context provides information about various cities and their tourist attractions, but it does not specifically mention hiking trails near Dubai with water sports activities.. Please ask more specifically about a particular city, activity, or budget.",
+        "citations": [],
+        "confidence": 0.0,
+        "quality_status": "insufficient",
+        "valid": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "url": "https://en.wikipedia.org/wiki/Berlin",
+    "city": "Berlin",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Berlin - Wikipedia"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Paris",
+    "city": "Paris",
+    "category": "art",
+    "price_level": "medium",
+    "title": "Paris - Wikipedia"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Tokyo",
+    "city": "Tokyo",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Tokyo - Wikipedia"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Barcelona",
+    "city": "Barcelona",
+    "category": "art",
+    "price_level": "medium",
+    "title": "Barcelona - Wikipedia"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Amsterdam",
+    "city": "Amsterdam",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Amsterdam - Wikipedia"
+  }
+]
