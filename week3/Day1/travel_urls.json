@@ -1,0 +1,107 @@
+[
+  {
+    "url": "documents/berlin_overview.txt",
+    "city": "Berlin",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Berlin - Overview and Attractions"
+  },
+  {
+    "url": "documents/berlin_food.txt",
+    "city": "Berlin",
+    "category": "food",
+    "price_level": "cheap",
+    "title": "German Food and Berlin Cuisine"
+  },
+  {
+    "url": "documents/berlin_sightseeing.txt",
+    "city": "Berlin",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Berlin Sightseeing and Attractions"
+  },
+  {
+    "url": "documents/paris_overview.txt",
+    "city": "Paris",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Paris - Overview and History"
+  },
+  {
+    "url": "documents/paris_food.txt",
+    "city": "Paris",
+    "category": "food",
+    "price_level": "medium",
+    "title": "French Cuisine and Paris Dining"
+  },
+  {
+    "url": "documents/paris_sightseeing.txt",
+    "city": "Paris",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Paris Landmarks and Sightseeing"
+  },
+  {
+    "url": "documents/tokyo_overview.txt",
+    "city": "Tokyo",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Tokyo - Overview and Districts"
+  },
+  {
+    "url": "documents/tokyo_food.txt",
+    "city": "Tokyo",
+    "category": "food",
+    "price_level": "cheap",
+    "title": "Japanese Cuisine and Tokyo Food Culture"
+  },
+  {
+    "url": "documents/tokyo_sightseeing.txt",
+    "city": "Tokyo",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Tokyo Sightseeing and Attractions"
+  },
+  {
+    "url": "documents/barcelona_overview.txt",
+    "city": "Barcelona",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Barcelona - Overview and Culture"
+  },
+  {
+    "url": "documents/barcelona_food.txt",
+    "city": "Barcelona",
+    "category": "food",
+    "price_level": "cheap",
+    "title": "Spanish Cuisine and Barcelona Tapas"
+  },
+  {
+    "url": "documents/barcelona_sightseeing.txt",
+    "city": "Barcelona",
+    "category": "sightseeing",
+    "price_level": "medium",
+    "title": "Barcelona Landmarks and Sightseeing"
+  },
+  {
+    "url": "documents/amsterdam_overview.txt",
+    "city": "Amsterdam",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Amsterdam - Overview and History"
+  },
+  {
+    "url": "documents/amsterdam_food.txt",
+    "city": "Amsterdam",
+    "category": "food",
+    "price_level": "cheap",
+    "title": "Dutch Cuisine and Amsterdam Food"
+  },
+  {
+    "url": "documents/amsterdam_sightseeing.txt",
+    "city": "Amsterdam",
+    "category": "sightseeing",
+    "price_level": "cheap",
+    "title": "Amsterdam Attractions and Sightseeing"
+  }
+]
