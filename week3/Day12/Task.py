@@ -44,6 +44,7 @@ class Turn:
     turn_num: int
     question: str
     action: Literal["retrieve", "tool", "answer", "refuse"]
+    source: Literal["vector_store", "memory", "refused"]  # Where did the answer come from?
     docs_retrieved: int
     answer_text: str
     confidence: float
@@ -51,7 +52,7 @@ class Turn:
     
     def to_memory_string(self) -> str:
         """Convert turn to compact memory string."""
-        return f"Q{self.turn_num}: {self.question[:60]}... → {self.action} (conf: {self.confidence:.2f}) | {self.summary[:100]}"
+        return f"Q{self.turn_num}: {self.question[:60]}... → {self.action}[{self.source}] (conf: {self.confidence:.2f}) | {self.summary[:100]}"
 
 
 @dataclass
@@ -242,13 +243,59 @@ def decide_action(
     memory: AgentMemory,
     vector_store,
     llm: ChatOllama
-) -> Literal["retrieve", "refuse"]:
-    """Decide what action to take next."""
+) -> Literal["retrieve", "tool", "answer", "refuse"]:
+    """
+    Decide what action to take next based on multiple factors.
     
-    # Check if we should retrieve documents
-    # Simple heuristic: if question has enough content and topics, retrieve
-    if len(question) > 10:
-        return "retrieve"
+    Actions:
+    - retrieve: Search vector store for relevant documents (new knowledge)
+    - answer: Use memory context directly (already discussed)
+    - tool: Would require external tool (future enhancement)
+    - refuse: Cannot process question
+    """
+    
+    # ===== Rule 1: Question Quality =====
+    question_length = len(question.strip())
+    if question_length < 5:
+        return "refuse"  # Too short to be meaningful
+    
+    # ===== Rule 2: Memory Context Check =====
+    question_lower = question.lower()
+    topics_in_question = extract_topics(question)
+    
+    # Check if question references previous discussion
+    if any(word in question_lower for word in ["earlier", "mentioned", "discussed", "before", "initially", "previously"]):
+        # Question is explicitly referencing previous context
+        if len(memory.turns) > 0 and len(memory.topics) > 0:
+            return "answer"  # Likely answerable from memory
+    
+    # Check if question asks about already-discussed topics with high confidence
+    if topics_in_question:
+        matching_topics = [t for t in memory.topics if any(topic in t for topic in topics_in_question)]
+        if matching_topics:
+            # Topics were discussed before
+            # Check if previous turns had high confidence
+            previous_confidences = [turn.confidence for turn in memory.turns 
+                                   if turn.action == "answer" and any(t in turn.summary.lower() for t in matching_topics)]
+            if previous_confidences and sum(previous_confidences) / len(previous_confidences) > 0.85:
+                return "answer"  # High confidence knowledge, use memory
+    
+    # ===== Rule 3: Question Characteristics =====
+    # Check if it's asking for definitions, relationships, connections
+    question_keywords = ["what is", "who is", "describe", "tell me about", "explain", 
+                        "how does", "what about", "relationship"]
+    is_definition_query = any(keyword in question_lower for keyword in question_keywords)
+    
+    # ===== Rule 4: Multi-topic correlation (reference to multiple known things) =====
+    if "relate" in question_lower or "connection" in question_lower or "compare" in question_lower:
+        if len(memory.topics) > 1:
+            return "retrieve"  # Need fresh data to make connections
+    
+    # ===== Rule 5: Default - Retrieve for well-formed questions =====
+    if question_length > 10 and is_definition_query:
+        return "retrieve"  # Standard case: retrieve from vector store
+    
+    # ===== Rule 6: Fallback =====
     return "refuse"
 
 
@@ -283,7 +330,7 @@ def execute_agent_loop(
     summary = ""
     
     if action == "retrieve":
-        # Retrieve documents
+        # Retrieve documents from vector store
         print(f"[RETRIEVE] Searching knowledge base...")
         docs = retrieve_docs(vector_store, question, K_RETRIEVE)
         docs_retrieved = len(docs)
@@ -300,20 +347,57 @@ def execute_agent_loop(
                 answer_text = response.get("answer", "")
                 confidence = response.get("confidence", 0.0)
                 action = "answer"
+                source = "vector_store"  # ← NEW: Track source
                 summary = answer_text[:100].replace("\n", " ")
                 
                 print(f"[ANSWER] Confidence: {confidence:.2f}")
                 print(f"[ANSWER] {answer_text[:150]}...")
             else:
                 action = "refuse"
+                source = "refused"  # ← NEW
                 summary = f"Error: {error}"
                 print(f"[REFUSE] {error}")
         else:
             action = "refuse"
+            source = "refused"  # ← NEW
             summary = "No relevant documents found"
             print(f"[REFUSE] No relevant documents found")
     
+    elif action == "answer":
+        # Answer using memory context only (no new retrieval)
+        print(f"[ANSWER_FROM_MEMORY] Using conversation context...")
+        print(f"[MEMORY] Context: {memory_summary[:200]}...")
+        
+        # Use only memory context, no retrieval
+        context = f"Previous conversation context provides sufficient information."
+        response, error = generate_structured_answer(llm, question, context, memory_summary)
+        
+        if not error:
+            answer_text = response.get("answer", "")
+            confidence = response.get("confidence", 0.0)
+            source = "memory"  # ← NEW: Track source
+            summary = answer_text[:100].replace("\n", " ")
+            
+            print(f"[ANSWER_FROM_MEMORY] Confidence: {confidence:.2f}")
+            print(f"[ANSWER_FROM_MEMORY] {answer_text[:150]}...")
+        else:
+            action = "refuse"
+            source = "refused"  # ← NEW
+            summary = f"Error: {error}"
+            print(f"[REFUSE] {error}")
+        
+        docs_retrieved = 0
+    
+    elif action == "tool":
+        # Placeholder for tool use (external APIs, calculations, etc.)
+        print(f"[TOOL] Would use external tool/capability")
+        print(f"[TOOL] Not yet implemented")
+        action = "refuse"
+        source = "refused"  # ← NEW
+        summary = "Tool capability not implemented"
+    
     elif action == "refuse":
+        source = "refused"  # ← NEW
         summary = "Could not process question"
         print(f"[REFUSE] Cannot process question")
     
@@ -322,6 +406,7 @@ def execute_agent_loop(
         turn_num=turn_num,
         question=question,
         action=action,
+        source=source,  # ← NEW: Include source field
         docs_retrieved=docs_retrieved,
         answer_text=answer_text,
         confidence=confidence,
@@ -362,20 +447,82 @@ def test_multi_turn_queries():
     # Initialize LLM
     llm = ChatOllama(model=CHAT_MODEL)
     
-    # Multi-turn conversation where later queries depend on earlier context
-    multi_turn_queries = [
-        # Turn 1: Introduce main character
-        "Who is Jon Snow?",
-        
-        # Turn 2: Follow-up about the same character
-        "What's his relationship to the other characters mentioned earlier?",
-        
-        # Turn 3: Related topic
-        "Tell me about the Stark family.",
-        
-        # Turn 4: Connect back to earlier topics
-        "How does this relate to what we discussed about Jon Snow initially?",
+    # 5 multi-turn test scenarios: 3 correct decisions + 2 edge cases with memory errors
+    # NOTE: decisions now include source: "answer[vector_store]", "answer[memory]", or "refuse[refused]"
+    
+    test_scenarios = [
+        {
+            "name": "Scenario 1: Straight Forward Memory Usage",
+            "description": "Good case: Agent correctly uses memory for follow-up questions",
+            "queries": [
+                "Who is Jon Snow?",
+                "What's his relationship to the other characters mentioned earlier?",
+                "Tell me about House Stark.",
+                "How does Jon connect to this house we just discussed?",
+            ],
+            "expected_decisions": ["answer[vector_store]", "answer[memory]", "answer[vector_store]", "answer[memory]"],
+            "expected_docs_retrieved": [5, 0, 5, 0],
+            "expected_outcome": "✅ CORRECT - Alternates between retrieval & memory"
+        },
+        {
+            "name": "Scenario 2: Accumulating Context Over Turns",
+            "description": "Good case: Memory accumulates and informs decisions",
+            "queries": [
+                "Who is Daenerys Targaryen?",
+                "What dragons did she have?",
+                "Tell me about the Targaryen family.",
+                "How were the Targaryens connected to dragons initially?",
+            ],
+            "expected_decisions": ["answer[vector_store]", "answer[vector_store]", "answer[vector_store]", "answer[memory]"],
+            "expected_docs_retrieved": [5, 5, 5, 0],
+            "expected_outcome": "✅ CORRECT - Topics accumulate, later questions use memory"
+        },
+        {
+            "name": "Scenario 3: Explicit Memory References",
+            "description": "Good case: Agent detects explicit references to previous discussions",
+            "queries": [
+                "Who rules the Seven Kingdoms?",
+                "What was discussed earlier about rulers?",
+                "Compare this to what we initially mentioned.",
+                "Has anything we discussed before apply here?",
+            ],
+            "expected_decisions": ["answer[vector_store]", "answer[memory]", "answer[memory]", "answer[memory]"],
+            "expected_docs_retrieved": [5, 0, 0, 0],
+            "expected_outcome": "✅ CORRECT - Keywords trigger memory-only responses"
+        },
+        {
+            "name": "Scenario 4: Memory False Positive (Edge Case)",
+            "description": "⚠️ EDGE CASE: Agent reuses memory for DIFFERENT entity with same name",
+            "queries": [
+                "Who is Jon Snow?",
+                "What about Jon the blacksmith? (different Jon)",
+                "Tell me about northern characters.",
+                "Does Jon the blacksmith relate to the north?",
+            ],
+            "expected_decisions": ["answer[vector_store]", "answer[vector_store]", "answer[vector_store]", "refuse[refused]"],
+            "expected_docs_retrieved": [5, 5, 5, 0],
+            "expected_outcome": "⚠️ SHOWS LIMITATION - Same entity name causes confusion"
+        },
+        {
+            "name": "Scenario 5: Memory Overgeneralization (Edge Case)",
+            "description": "⚠️ EDGE CASE: High confidence on one query type transfers to different types",
+            "queries": [
+                "Who is Tyrion Lannister?",
+                "Is Tyrion evil?",
+                "What are Lannister family values?",
+                "Would you say Tyrion fits these values?",
+            ],
+            "expected_decisions": ["answer[vector_store]", "answer[memory]", "answer[memory]", "answer[memory]"],
+            "expected_docs_retrieved": [5, 0, 0, 0],
+            "expected_outcome": "⚠️ SHOWS LIMITATION - High confidence overgeneralizes across question types"
+        }
     ]
+    
+    # Run all scenarios
+    all_results = {
+        "timestamp": datetime.now().isoformat(),
+        "scenarios": []
+    }
     
     # Initialize agent memory
     memory = AgentMemory()
@@ -386,37 +533,90 @@ def test_multi_turn_queries():
         "conversation": []
     }
     
-    # Run multi-turn loop
-    for turn_num, question in enumerate(multi_turn_queries, 1):
-        turn, memory = execute_agent_loop(llm, vector_store, turn_num, question, memory)
-        results["conversation"].append(asdict(turn))
+    # Run all scenarios
+    scenario_results = []
+    
+    for scenario_idx, scenario in enumerate(test_scenarios, 1):
+        print(f"\n\n{'#'*80}")
+        print(f"# TEST SCENARIO {scenario_idx}: {scenario['name']}")
+        print(f"{'#'*80}")
+        print(f"Description: {scenario['description']}")
+        print(f"Expected Outcome: {scenario['expected_outcome']}\n")
+        
+        # Reset memory for new scenario
+        memory = AgentMemory()
+        scenario_conversation = []
+        
+        # Run each query in the scenario
+        for turn_num, question in enumerate(scenario['queries'], 1):
+            turn, memory = execute_agent_loop(llm, vector_store, turn_num, question, memory)
+            scenario_conversation.append(asdict(turn))
+        
+        # Analyze scenario
+        actual_decisions = [f"{turn.action}[{turn.source}]" for turn in memory.turns]
+        actual_docs = [turn.docs_retrieved for turn in memory.turns]
+        decisions_match = actual_decisions == scenario['expected_decisions']
+        
+        print(f"\n--- SCENARIO ANALYSIS ---")
+        print(f"Expected decisions: {scenario['expected_decisions']}")
+        print(f"Actual decisions:   {actual_decisions}")
+        print(f"Expected docs:      {scenario['expected_docs_retrieved']}")
+        print(f"Actual docs:        {actual_docs}")
+        print(f"Match: {'✅ YES' if decisions_match else '❌ MISMATCH'}")
+        
+        scenario_results.append({
+            "scenario_num": scenario_idx,
+            "name": scenario['name'],
+            "description": scenario['description'],
+            "expected_outcome": scenario['expected_outcome'],
+            "expected_decisions": scenario['expected_decisions'],
+            "actual_decisions": actual_decisions,
+            "expected_docs_retrieved": scenario['expected_docs_retrieved'],
+            "actual_docs_retrieved": actual_docs,
+            "match": decisions_match,
+            "conversation": scenario_conversation,
+            "queries": scenario['queries']
+        })
     
     # === SUMMARY ===
     print(f"\n\n{'='*80}")
-    print("CONVERSATION SUMMARY")
+    print("COMPREHENSIVE TEST SUMMARY")
     print(f"{'='*80}\n")
     
-    print("Memory Summary:")
-    print(memory.get_context_summary())
+    # === SUMMARY ===
+    print(f"\n\n{'='*80}")
+    print("COMPREHENSIVE TEST SUMMARY")
+    print(f"{'='*80}\n")
     
-    print(f"\nTopics discussed: {memory.get_topics_summary()}")
+    correct_scenarios = sum([1 for s in scenario_results if "✅" in s['expected_outcome']])
+    edge_case_scenarios = sum([1 for s in scenario_results if "⚠️" in s['expected_outcome']])
     
-    print(f"\nTurns completed: {len(memory.turns)}")
+    matching_scenarios = sum([1 for s in scenario_results if s['match']])
+    mismatching_scenarios = sum([1 for s in scenario_results if not s['match']])
     
-    successful_answers = sum([1 for turn in memory.turns if turn.action == "answer"])
-    print(f"Successful answers: {successful_answers}/{len(memory.turns)}")
+    print(f"Test Scenarios: {len(scenario_results)}")
+    print(f"  ✅ Correct scenarios (expected to pass): {correct_scenarios}")
+    print(f"  ⚠️  Edge case scenarios (showing limitations): {edge_case_scenarios}")
+    print()
+    print(f"Decision Matching: {matching_scenarios}/{len(scenario_results)}")
+    print(f"  ✅ Passed (decisions match expected): {matching_scenarios}")
+    print(f"  ❌ Failed (decisions differ from expected): {mismatching_scenarios}")
     
-    if successful_answers > 0:
-        avg_confidence = sum([turn.confidence for turn in memory.turns if turn.action == "answer"]) / successful_answers
-        print(f"Average confidence: {avg_confidence:.2f}")
-    
-    # Save results
+    # Save to JSON
     output_file = os.path.join(SCRIPT_DIR, "agent_loop_results.json")
     with open(output_file, 'w') as f:
-        json.dump(results, f, indent=2)
-    print(f"\n✓ Results saved to {output_file}")
+        json.dump(scenario_results, f, indent=2)
+    print(f"\n✓ JSON results saved to {output_file}")
     
-    return results
+    return scenario_results
+
+
+# ============================================================================
+# TESTING: MULTI-TURN CONVERSATION
+# ============================================================================
+
+def test_multi_turn_queries_old():
+    """Old test function - replaced by comprehensive scenario testing."""
 
 
 # ============================================================================
