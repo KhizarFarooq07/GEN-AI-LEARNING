@@ -256,22 +256,44 @@ def create_react_agent(vector_store, memory: ConversationMemory):
     Settings.embed_model = embed_model
     Settings.llm = llm
     
+    # System prompt to constrain agent behavior
+    system_prompt = """You are an expert Game of Thrones assistant. You MUST follow these rules strictly:
+
+1. ONLY respond based on information from the Game of Thrones knowledge base, retrieved documents, or previous conversation memory.
+2. Use the following strategy:
+   a) First, check the "consult_memory" tool to see if relevant information from previous turns can help answer the question.
+   b) Then use the "retrieve_knowledge_base" tool to search for relevant documents about the topic.
+   c) Combine information from BOTH sources (memory + documents) when available.
+3. If NEITHER the knowledge base NOR memory contain relevant information, respond with: "I don't know - this information is not available in my knowledge base or conversation history."
+4. NEVER make up information, guesses, or use general knowledge not in retrieved documents or memory.
+5. Always cite the source of your information (whether it's from documents or previous conversation).
+6. Be honest about the limitations of your knowledge - if information is incomplete or missing, state that clearly.
+7. If a question builds on previous context, prioritize memory to show conversation continuity.
+
+Remember: It is better to say "I don't know" than to provide incorrect information."""
+    
     # Define tools
     tools = [
         FunctionTool.from_defaults(
             fn=retrieve_from_knowledge_base,
             name="retrieve_knowledge_base",
-            description="Search the Game of Thrones knowledge base for information about characters, events, houses, and relationships",
+            description="Search the Game of Thrones knowledge base for information about characters, events, houses, and relationships. MUST be called before answering any question.",
         ),
         FunctionTool.from_defaults(
             fn=consult_conversation_memory,
             name="consult_memory",
-            description="Check previous conversation history and discussed topics to understand context",
+            description="Check previous conversation history and discussed topics to understand context from earlier turns",
         ),
     ]
     
-    # Create ReAct agent
-    agent = ReActAgent(tools=tools, llm=llm, verbose=True, max_iterations=5)
+    # Create ReAct agent with system prompt
+    agent = ReActAgent(
+        tools=tools, 
+        llm=llm, 
+        verbose=True, 
+        max_iterations=5,
+        system_prompt=system_prompt
+    )
     
     return agent
 
