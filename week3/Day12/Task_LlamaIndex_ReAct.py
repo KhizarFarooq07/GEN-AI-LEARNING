@@ -324,15 +324,29 @@ async def execute_agent_turn_async(
         
         # Collect output
         output = []
-        async for ev in handler.stream_events():
-            if isinstance(ev, AgentStream):
-                output.append(ev.delta)
-                print(ev.delta, end="", flush=True)
+        try:
+            async for ev in handler.stream_events():
+                if isinstance(ev, AgentStream):
+                    output.append(ev.delta)
+                    print(ev.delta, end="", flush=True)
+        except Exception as stream_err:
+            print(f"\n[Stream Error] {stream_err}")
         
         # Get final response
-        response = await handler
+        try:
+            response = await handler
+        except Exception as handler_err:
+            print(f"\n[Handler Error] {handler_err}")
+            import traceback
+            traceback.print_exc()
+            raise
         
-        answer_text = str(response)
+        if response is None:
+            print("\n[WARNING] Agent returned None response")
+            answer_text = "No response returned from agent"
+        else:
+            answer_text = str(response)
+        
         confidence = calculate_confidence(answer_text)
         
         action = "answer"
@@ -346,7 +360,9 @@ async def execute_agent_turn_async(
         print(f"[ANSWER] {answer_text[:200]}...\n")
         
     except Exception as e:
-        print(f"[ERROR] {str(e)}")
+        import traceback
+        print(f"\n[ERROR] {type(e).__name__}: {str(e)}")
+        traceback.print_exc()
         action = "refuse"
         source = "refused"
         answer_text = f"Error: {str(e)}"
