@@ -1,0 +1,12 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+langchain==0.1.0
+langchain-ollama==0.0.1
+langchain-huggingface==0.0.18
+langchain-community==0.0.10
+datasets==2.14.6
+requests==2.31.0
+python-multipart==0.0.6
+duckduckgo-search==3.9.10
+
